@@ -15,20 +15,20 @@
 <meta property="og:site_name" content="Kevin&#39;s Blog">
 <meta property="og:description" content="计网复习  [toc] TCP&#x2F;IP协议簇是互联网的基石 位Bit——&gt;0&#x2F;1字节Byte——&gt;8个位字Word——&gt;16个位&#x2F;2字节双字DWord——&gt;32个位&#x2F;4字节&#x2F;2字 一、TCP&#x2F;IP协议体系的认知：TCP&#x2F;IP是封装于系统内，属于内核态的协议栈。TCP&#x2F;IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运">
 <meta property="og:locale">
-<meta property="og:image" content="en-resource://database/611:1">
-<meta property="og:image" content="en-resource://database/609:1">
-<meta property="og:image" content="en-resource://database/616:1">
-<meta property="og:image" content="en-resource://database/617:1">
-<meta property="og:image" content="en-resource://database/618:1">
-<meta property="og:image" content="en-resource://database/622:1">
-<meta property="og:image" content="en-resource://database/634:1">
-<meta property="og:image" content="en-resource://database/636:1">
-<meta property="og:image" content="en-resource://database/635:1">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image1.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image2.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image3.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image4.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image5.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image6.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image7.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image8.png">
 <meta property="article:published_time" content="2021-04-29T13:31:54.424Z">
-<meta property="article:modified_time" content="2021-04-29T14:09:40.516Z">
+<meta property="article:modified_time" content="2021-04-29T16:19:43.095Z">
 <meta property="article:author" content="DaftPumpkin">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="en-resource://database/611:1">
+<meta name="twitter:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image.png">
   
     <link rel="alternative" href="/atom.xml" title="Kevin&#39;s Blog" type="application/atom+xml">
   
@@ -57,7 +57,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/source/images/头像.jpg" class="js-avatar">
+			<img src="/images/头像.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/"></a></h1>
@@ -96,11 +96,8 @@
 					<a class="douban" target="_blank" href="https://www.douban.com/people/208685573/" title="douban"><i class="icon-douban"></i></a>
 		        
 			</div>
-		</nav>
-	</header>		
-</div>
-
-
+			
+			
             
             
             
@@ -110,6 +107,11 @@
             </div>
             
         
+
+		</nav>
+	</header>		
+</div>
+
 
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -122,7 +124,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/source/images/头像.jpg" class="js-avatar">
+				<img src="/images/头像.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author"></h1>
@@ -190,9 +192,10 @@
 <p>[toc]</p>
 <p>TCP/IP协议簇是互联网的基石</p>
 <p>位Bit——&gt;0/1<br>字节Byte——&gt;8个位<br>字Word——&gt;16个位/2字节<br>双字DWord——&gt;32个位/4字节/2字</p>
-<h2 id="一、TCP-IP协议体系的认知："><a href="#一、TCP-IP协议体系的认知：" class="headerlink" title="一、TCP/IP协议体系的认知："></a>一、TCP/IP协议体系的认知：</h2><p>TCP/IP是封装于系统内，属于内核态的协议栈。<br>TCP/IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层、表示层和应用层。<br>但是这显然是有些复杂的，所以在TCP/IP协议中，它们被简化为了四个层次。 <br>（1）应用层、表示层、会话层三个层次提供的服务相差不是很大，所以在TCP/IP协议中，它们被合并为应用层一个层次。 [1] <br>（2）由于运输层和网络层在网络协议中的地位十分重要，所以在TCP/IP协议中它们被作为独立的两个层次。 [1] <br>（3）因为数据链路层和物理层的内容相差不多，所以在TCP/IP协议中它们被归并在网络接口层一个层次里。只有四层体系结构的TCP/IP协议，与有七层体系结构的OSI相比要简单了不少，也正是这样，TCP/IP协议在实际的应用中效率更高，成本更低。<br><img src="en-resource://database/611:1" alt="6c2cd1113d207f1a431e2bcd74525ff6.png"><br><img src="en-resource://database/609:1" alt="87c6e9df861a05418eb3ef68641ff74d.png"></p>
+<h2 id="一、TCP-IP协议体系的认知："><a href="#一、TCP-IP协议体系的认知：" class="headerlink" title="一、TCP/IP协议体系的认知："></a>一、TCP/IP协议体系的认知：</h2><p>TCP/IP是封装于系统内，属于内核态的协议栈。<br>TCP/IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层、表示层和应用层。<br>但是这显然是有些复杂的，所以在TCP/IP协议中，它们被简化为了四个层次。 <br>（1）应用层、表示层、会话层三个层次提供的服务相差不是很大，所以在TCP/IP协议中，它们被合并为应用层一个层次。 [1] <br>（2）由于运输层和网络层在网络协议中的地位十分重要，所以在TCP/IP协议中它们被作为独立的两个层次。 [1] <br>（3）因为数据链路层和物理层的内容相差不多，所以在TCP/IP协议中它们被归并在网络接口层一个层次里。只有四层体系结构的TCP/IP协议，与有七层体系结构的OSI相比要简单了不少，也正是这样，TCP/IP协议在实际的应用中效率更高，成本更低。</p>
 <span id="more"></span>
 
+<p><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image.png" alt="6c2cd1113d207f1a431e2bcd74525ff6.png"><br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image1.png" alt="87c6e9df861a05418eb3ef68641ff74d.png"></p>
 <h2 id="二、数据链路层（从底层往高层-）"><a href="#二、数据链路层（从底层往高层-）" class="headerlink" title="二、数据链路层（从底层往高层 ）"></a>二、数据链路层（从底层往高层 ）</h2><h3 id="1-以太网帧的格式："><a href="#1-以太网帧的格式：" class="headerlink" title="1.以太网帧的格式："></a>1.以太网帧的格式：</h3><p>以<u>太网链路传输的数据包</u>称做以太帧，或者以太网数据帧。在以太网中，网络访问层的软件必须把数据转换成能够通过网络适配器硬件进行传输的格式。</p>
 <p><u>以太帧的工作机制：</u><br>当以太网软件从网络层接收到数据报之后，需要完成如下操作：</p>
 <ol>
@@ -202,7 +205,7 @@
 </li>
 <li><p>把数据帧传递给对应于 OSI 模型物理层的底层组件，后者把帧转换为比特流，并且通过传输介质发送出去。</p>
 </li>
-<li><p>以太网上的其他网络适配器接收到这个帧，检查其中的目的地址。如果目的地址与网络适配器的地址相匹配，适配器软件就会处理接收到的帧，把数据传递给协议栈中较高的层。<br><img src="en-resource://database/616:1" alt="ef33e35addabcf9e8d1dc8bdc64e8abe.png"></p>
+<li><p>以太网上的其他网络适配器接收到这个帧，检查其中的目的地址。如果目的地址与网络适配器的地址相匹配，适配器软件就会处理接收到的帧，把数据传递给协议栈中较高的层。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image2.png" alt="ef33e35addabcf9e8d1dc8bdc64e8abe.png"></p>
 </li>
 </ol>
 <p>802.3协议以太网帧格式</p>
@@ -219,7 +222,7 @@
 <h3 id="3-ARP-RARP协议："><a href="#3-ARP-RARP协议：" class="headerlink" title="3.ARP/RARP协议："></a>3.ARP/RARP协议：</h3><h4 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h4><p>ARP协议是“Address Resolution Protocol”（地址解析协议）的缩写。其作用是在以太网环境中，数据的传输所依懒的是MAC地址而非IP地址，而将已知IP地址转换为MAC地址的工作是由ARP协议来完成的。</p>
 <p>根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到局域网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。地址解析协议是建立在网络中各个主机互相信任的基础上的</p>
 <p>OSI模型把网络工作分为七层，IP地址在OSI模型的第三层，MAC地址在第二层，彼此不直接打交道。在通过以太网发送IP数据包时，需要先封装第三层（32位IP地址）、第二层（48位MAC地址）的报头，但由于发送时只知道目标IP地址，不知道其MAC地址，又不能跨第二、三层，所以需要使用地址解析协议。使用地址解析协议，可根据网络层IP数据包包头中的IP地址信息解析出目标硬件地址（MAC地址）信息，以保证通信的顺利进行。</p>
-<p>1.报文格式<br><img src="en-resource://database/617:1" alt="d0908b35346220454050fe64ca7b173c.png"></p>
+<p>1.报文格式<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image3.png" alt="d0908b35346220454050fe64ca7b173c.png"></p>
 <p>2.ARP查询原理</p>
 <p>主机A的IP地址为192.168.1.1，MAC地址为0A-11-22-33-44-01；<br>主机B的IP地址为192.168.1.2，MAC地址为0A-11-22-33-44-02；<br>当主机A要与主机B通信时，地址解析协议可以将主机B的IP地址（192.168.1.2）解析成主机B的MAC地址，以下为工作流程：</p>
 <p>第1步：根据主机A上的路由表内容，IP确定用于访问主机B的转发IP地址是192.168.1.2。然后A主机在自己的本地ARP缓存中检查主机B的匹配MAC地址。</p>
@@ -233,7 +236,7 @@
 <h2 id="三、网络层"><a href="#三、网络层" class="headerlink" title="三、网络层"></a>三、网络层</h2><p>不同于电信网的面向连接的通信方式所提供的可靠传输的服务，网络层向上只提供简单灵活的、无连接的、尽最大努力交付的数据报服务。</p>
 <p>IP位于TCP/IP模型的网络层(相当于OSI模型的网络层)，它可以向传输层提供各种协议的信息，例如TCP、UDP等；对下可将IP信息包放到链路层，通过以太网、令牌环网络等各种技术来传送。</p>
 <p>为了能适应异构网络，IP强调适应性、简洁性和可操作性，并在可靠性做了一定的牺牲。IP不保证分组的交付时限和可靠性，所传送分组有可能出现丢失、重复、延迟或乱序等问题。</p>
-<h3 id="1-IP首部格式："><a href="#1-IP首部格式：" class="headerlink" title="1.IP首部格式："></a>1.IP首部格式：</h3><p><img src="en-resource://database/618:1" alt="b5d6c2626ad11990693eecc7ed2b95cc.png"></p>
+<h3 id="1-IP首部格式："><a href="#1-IP首部格式：" class="headerlink" title="1.IP首部格式："></a>1.IP首部格式：</h3><p><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image4.png" alt="b5d6c2626ad11990693eecc7ed2b95cc.png"></p>
 <p>16位分片标识<br>DF不分片标志<br>MF更多分片标志<br>13位片偏移<br>8位生存时间TTL<br>16位的首部检验和</p>
 <h3 id="2-IP分片："><a href="#2-IP分片：" class="headerlink" title="2.IP分片："></a>2.IP分片：</h3><p>当IP数据报超过帧的MTU(1500)(最大传输单元)时，它将会被分片传输。分片能发生在发送端或者中转路由器，且在传输过程中可能被多次分片。在最后的目标机器上这些分片才会被内核的的IP模块重新组装。</p>
 <h4 id="分片情况"><a href="#分片情况" class="headerlink" title="分片情况"></a>分片情况</h4><p><u>IP分片发生在IP层</u>，不仅源端主机会进行分片，中间的路由器也有可能分片，因为不同的网络的MTU是不一样的，如果传输路径上的某个网络的MTU比源端网络的MTU要小，路由器就可能对IP数据报再次进行分片。而分片数据的重组只会发生在目的端的IP层。</p>
@@ -242,21 +245,21 @@
 <h4 id="如何避免IP分片"><a href="#如何避免IP分片" class="headerlink" title="如何避免IP分片"></a>如何避免IP分片</h4><p>在网络编程中，我们要避免出现IP分片，那么为什么要避免呢？原因是IP层是没有超时重传机制的，如果IP层对一个数据包进行了分片，只要有一个分片丢失了，只能依赖于传输层进行重传，结果是所有的分片都要重传一遍，这个代价有点大。由此可见，IP分片会大大降低传输层传送数据的成功率，所以我们要避免IP分片。<br>对于UDP包，我们需要在应用层去限制每个包的大小，一般不要超过1472字节，即以太网MTU（1500）—UDP首部（8）—IP首部（20）。<br>对于TCP数据，应用层就不需要考虑这个问题了，因为传输层已经帮我们做了。在建立连接的三次握手的过程中，连接双方会相互通告MSS（Maximum Segment Size，最大报文段长度），MSS一般是MTU—IP首部（20）—TCP首部（20），每次发送的TCP数据都不会超过双方MSS的最小值，所以就保证了IP数据报不会超过MTU，避免了IP分片。</p>
 <h4 id="如何确定分片顺序"><a href="#如何确定分片顺序" class="headerlink" title="如何确定分片顺序"></a>如何确定分片顺序</h4><h4 id="接收端如何确定所有分片都到达"><a href="#接收端如何确定所有分片都到达" class="headerlink" title="接收端如何确定所有分片都到达"></a>接收端如何确定所有分片都到达</h4><h4 id="IP选路"><a href="#IP选路" class="headerlink" title="IP选路"></a>IP选路</h4><h4 id="路由表的含义"><a href="#路由表的含义" class="headerlink" title="路由表的含义"></a>路由表的含义</h4><h3 id="3-ICMP协议："><a href="#3-ICMP协议：" class="headerlink" title="3.ICMP协议："></a>3.ICMP协议：</h3><p>ICMP（Internet Control Message Protocol）Internet控制报文协议。它是TCP/IP协议簇的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。</p>
 <p>ICMP使用IP的基本支持，就像它是一个更高级别的协议，但是，ICMP实际上是IP的一个组成部分，必须由每个IP模块实现。</p>
-<h4 id="ICMP报文格式"><a href="#ICMP报文格式" class="headerlink" title="ICMP报文格式"></a>ICMP报文格式</h4><p>ICMP报文包含在IP数据报中，属于IP的一个用户，IP头部就在ICMP报文的前面，所以一个ICMP报文包括IP头部、ICMP头部和ICMP报文，IP头部的Protocol值为1就说明这是一个ICMP报文，ICMP头部中的类型（Type）域用于说明ICMP报文的作用及格式，此外还有一个代码（Code）域用于详细说明某种ICMP报文的类型，所有数据都在ICMP头部后面。<br><img src="en-resource://database/622:1" alt="7674c05b00910d728f03113e82a1e3ef.png"></p>
+<h4 id="ICMP报文格式"><a href="#ICMP报文格式" class="headerlink" title="ICMP报文格式"></a>ICMP报文格式</h4><p>ICMP报文包含在IP数据报中，属于IP的一个用户，IP头部就在ICMP报文的前面，所以一个ICMP报文包括IP头部、ICMP头部和ICMP报文，IP头部的Protocol值为1就说明这是一个ICMP报文，ICMP头部中的类型（Type）域用于说明ICMP报文的作用及格式，此外还有一个代码（Code）域用于详细说明某种ICMP报文的类型，所有数据都在ICMP头部后面。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image5.png" alt="7674c05b00910d728f03113e82a1e3ef.png"></p>
 <h4 id="ICMP报文分两类：查询-2种-查错-5种"><a href="#ICMP报文分两类：查询-2种-查错-5种" class="headerlink" title="ICMP报文分两类：查询(2种)+查错(5种)"></a>ICMP报文分两类：查询(2种)+查错(5种)</h4><h2 id="四、传输层"><a href="#四、传输层" class="headerlink" title="四、传输层"></a>四、传输层</h2><h3 id="1-UDP协议的特点"><a href="#1-UDP协议的特点" class="headerlink" title="1.UDP协议的特点"></a>1.UDP协议的特点</h3><p>Internet 的传输层有两个主要协议，互为补充。无连接的是 UDP，它除了给应用程序发送数据包功能并允许它们在所需的层次上架构自己的协议之外，几乎没有做什么特别的事情。面向连接的是 TCP，该协议几乎做了所有的事情。</p>
 <p>用户数据报协议（UDP，User Datagram Protocol）。UDP 为应用程序提供了一种无需建立连接就可以发送封装的 IP 数据包的方法。<br>它主要用于不要求分组顺序到达的传输中，分组传输顺序的检查与排序由应用层完成，提供面向事务的简单不可靠信息传送服务。UDP 协议基本上是IP协议与上层协议的接口。UDP协议适用端口分别运行在同一台设备上的多个应用程序。</p>
-<p>首部字段<br><img src="en-resource://database/634:1" alt="2f5ce1966024cba0eec3a405a9796c57.png"></p>
+<p>首部字段<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image6.png" alt="2f5ce1966024cba0eec3a405a9796c57.png"></p>
 <h3 id="2-TCP协议"><a href="#2-TCP协议" class="headerlink" title="2.TCP协议"></a>2.<u>TCP协议</u></h3><p>特点</p>
 <p>传输控制协议（TCP，Transmission Control Protocol）是为了在不可靠的互联网络上提供可靠的端到端字节流而专门设计的一个传输协议。</p>
 <p>首部字段<br>可靠机制</p>
 <h3 id="3-TCP的连接控制："><a href="#3-TCP的连接控制：" class="headerlink" title="3.TCP的连接控制："></a>3.<u>TCP的连接控制</u>：</h3><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>TCP是因特网中的传输层协议，使用三次握手协议建立连接。当主动方发出SYN连接请求后，等待对方回答SYN+ACK，并最终对对方的 SYN 执行 ACK 确认。这种建立连接的方法可以防止产生错误的连接，TCP使用的流量控制协议是可变大小的滑动窗口协议。</p>
-<p>TCP三次握手的过程如下：<br>1.客户端发送SYN（SEQ=x）报文给服务器端，进入SYN_SEND状态。<br>2.服务器端收到SYN报文，回应一个SYN （SEQ=y）ACK（ACK=x+1）报文，进入SYN_RECV状态。<br>3.客户端收到服务器端的SYN报文，回应一个ACK（ACK=y+1）报文，进入Established状态。<br>三次握手完成，TCP客户端和服务器端成功地建立连接，可以开始传输数据了。<br><img src="en-resource://database/636:1" alt="6edd97f611269a37857246922d558afc.png"></p>
+<p>TCP三次握手的过程如下：<br>1.客户端发送SYN（SEQ=x）报文给服务器端，进入SYN_SEND状态。<br>2.服务器端收到SYN报文，回应一个SYN （SEQ=y）ACK（ACK=x+1）报文，进入SYN_RECV状态。<br>3.客户端收到服务器端的SYN报文，回应一个ACK（ACK=y+1）报文，进入Established状态。<br>三次握手完成，TCP客户端和服务器端成功地建立连接，可以开始传输数据了。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image7.png" alt="6edd97f611269a37857246922d558afc.png"></p>
 <h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由TCP的半关闭（half-close）造成的。具体过程如下图所示。</p>
 <ol>
 <li>某个应用进程首先调用close，称该端执行“主动关闭”（active close）。该端的TCP于是发送一个FIN分节，表示数据发送完毕。</li>
 <li>接收到这个FIN的对端执行 “被动关闭”（passive close），这个FIN由TCP确认。<br>注意：FIN的接收也作为一个文件结束符（end-of-file）传递给接收端应用进程，放在已排队等候该应用进程接收的任何其他数据之后，因为，FIN的接收意味着接收端应用进程在相应连接上再无额外数据可接收。</li>
 <li>一段时间后，接收到这个文件结束符的应用进程将调用close关闭它的套接字。这导致它的TCP也发送一个FIN。</li>
-<li>接收这个最终FIN的原发送端TCP（即执行主动关闭的那一端）确认这个FIN。<br>既然每个方向都需要一个FIN和一个ACK，因此通常需要4个分节。<br><img src="en-resource://database/635:1" alt="07bf5cd028fcc520d56346c72689d009.png"></li>
+<li>接收这个最终FIN的原发送端TCP（即执行主动关闭的那一端）确认这个FIN。<br>既然每个方向都需要一个FIN和一个ACK，因此通常需要4个分节。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image8.png" alt="07bf5cd028fcc520d56346c72689d009.png"></li>
 </ol>
 <p>同时打开<br>同时关闭<br>半关闭</p>
 <h3 id="4-TCP流量控制机制："><a href="#4-TCP流量控制机制：" class="headerlink" title="4.TCP流量控制机制："></a>4.<u>TCP流量控制机制</u>：</h3><p>滑动窗口<br>慢启动<br>拥塞避免<br>快速重传<br>快速恢复</p>
@@ -614,3 +617,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
   </div>
 </body>
 </html>
+
+

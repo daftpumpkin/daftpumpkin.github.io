@@ -45,7 +45,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/source/images/头像.jpg" class="js-avatar">
+			<img src="/images/头像.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/"></a></h1>
@@ -84,11 +84,8 @@
 					<a class="douban" target="_blank" href="https://www.douban.com/people/208685573/" title="douban"><i class="icon-douban"></i></a>
 		        
 			</div>
-		</nav>
-	</header>		
-</div>
-
-
+			
+			
             
             
             
@@ -98,6 +95,11 @@
             </div>
             
         
+
+		</nav>
+	</header>		
+</div>
+
 
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -110,7 +112,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/source/images/头像.jpg" class="js-avatar">
+				<img src="/images/头像.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author"></h1>
@@ -180,10 +182,6 @@
 <p>[TOC]</p>
 <h1 id="一、类与对象"><a href="#一、类与对象" class="headerlink" title="一、类与对象"></a>一、类与对象</h1><h2 id="1-类的定义"><a href="#1-类的定义" class="headerlink" title="1.类的定义"></a>1.类的定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clock</span> &#123;</span></span><br><span class="line">  <span class="keyword">public</span>: </span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setTime</span><span class="params">(<span class="keyword">int</span> newH, <span class="keyword">int</span> newM, <span class="keyword">int</span> newS)</span></span>;   </span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">showTime</span><span class="params">()</span></span>; <span class="comment">//在类中可以只声明函数的原型，函数的实现（函数体）可以在类外定义</span></span><br><span class="line">  <span class="keyword">private</span>:   </span><br><span class="line">   <span class="keyword">int</span> hour, minute, second;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>将抽象出的数据和行为相结合，将它们视为一个整体<br>将数据与操作数据的函数进行有机结合，形成“类”<br>其中的数据和函数都是类的成员<br>数据成员<br>函数成员</p>
-<h2 id="2-类成员的访问控制"><a href="#2-类成员的访问控制" class="headerlink" title="2.类成员的访问控制"></a>2.类成员的访问控制</h2><h3 id="公有类型成员"><a href="#公有类型成员" class="headerlink" title="公有类型成员"></a>公有类型成员</h3><p>在关键字public后面声明，它们是类与外部的接口，任何外部函数都可以访问公有类型数据和函数</p>
-<h3 id="私有类型成员"><a href="#私有类型成员" class="headerlink" title="私有类型成员"></a>私有类型成员</h3><p>在关键字private后面声明，只允许本类中的函数访问，而类外部的任何函数都不能访问<br>如果紧跟在类名称的后面声明私有成员，则关键字private可以省略<br>数据成员尽量声明为私有成员</p>
-<h3 id="保护类型成员"><a href="#保护类型成员" class="headerlink" title="保护类型成员"></a>保护类型成员</h3><p>与private类似，其差别表现在继承与派生时对派生类的影响不同</p>
-<h2 id="3-对象"><a href="#3-对象" class="headerlink" title="3.对象"></a>3.对象</h2><p>类的对象是该类的某一特定实体<br>声明形式：  类名  对象名；<br>例：Clock  myClock;<br>类中成员互访<br>直接使用成员名<br>类外访问<br>使用“对象名.成员名”方式访问 public 属性的成员</p>
         
           <a class="article-more-a" href="/2021/04/29/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">展开全文 >></a>
         
@@ -248,10 +246,6 @@
 <h1 id="一、系统的选择"><a href="#一、系统的选择" class="headerlink" title="一、系统的选择"></a>一、系统的选择</h1><p>1.根据自己需求选择下载系统，可以在树莓派官网：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/">https://www.raspberrypi.org/</a> 查看对应的系统，这里使用官方推荐的系统：Raspberry Pi OS<br>在官网下载种子以后使用其他下载工具可以加速下载。</p>
 <p>2.制作系统：使用到<code>balenaEtcher</code>这个软件，一键烧录到TF卡，十分方便。</p>
 <p>3.接好外设，上电，先不必配置，因为不换源的话是无法update的。</p>
-<h1 id="二、换源："><a href="#二、换源：" class="headerlink" title="二、换源："></a>二、换源：</h1><p>这里选择清华源：<a target="_blank" rel="noopener" href="https://mirror.tuna.tsinghua.edu.cn/help/raspbian/">https://mirror.tuna.tsinghua.edu.cn/help/raspbian/</a><br>（1）在命令行窗口内输入 sudo nano /etc/apt/sources.list 并回车，进入编辑器。（nano是系统内置的轻量化文本编辑器）</p>
-<p>（2）按照清华源网站中给出的网址修改，按 ctrl-o 保存，按 ctrl-x 关闭。</p>
-<p>（3）同样的方法，把<code> /etc/apt/sources.list.d/raspi.list </code>文件也替换好。</p>
-<p>（4）惯例：<code>sudo apt-get update</code></p>
         
           <a class="article-more-a" href="/2021/04/29/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/#more">展开全文 >></a>
         
@@ -321,8 +315,6 @@
 <p>4.在命令行中：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vcgencmd get_camera</span><br><span class="line">supported&#x3D;1 detected&#x3D;1</span><br></pre></td></tr></table></figure>
 <p>说明摄像头连接成功。</p>
-<h2 id="3-控制台中对摄像头的基本操作"><a href="#3-控制台中对摄像头的基本操作" class="headerlink" title="3. 控制台中对摄像头的基本操作"></a>3. 控制台中对摄像头的基本操作</h2><p>1.拍照：    <code>raspistill -o image.jpg</code><br>此处image.jpg 是照片文件名。</p>
-<p>2.录像：    <code>raspivid -o video.h264 -t 10000</code><br>其中 -t 10000 表示录制 10 秒，用户各根据自己的需要进行调整。#使用Python控制摄像头#</p>
         
           <a class="article-more-a" href="/2021/04/29/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/#more">展开全文 >></a>
         
@@ -386,19 +378,9 @@
         <h1 id="在Android上运行VScode"><a href="#在Android上运行VScode" class="headerlink" title="在Android上运行VScode"></a>在Android上运行VScode</h1><p>termux-ubuntu项目地址：<a target="_blank" rel="noopener" href="https://github.com/Neo-Oli/termux-ubuntu">https://github.com/Neo-Oli/termux-ubuntu</a></p>
 <p>code-server项目地址：<a target="_blank" rel="noopener" href="https://github.com/cdr/code-server">https://github.com/cdr/code-server</a></p>
 <h2 id="1-下载安装termux"><a href="#1-下载安装termux" class="headerlink" title="1.下载安装termux"></a>1.下载安装termux</h2><p>因为网络问题install失败，可以在这个网址直接下载完整的安装包：<br><a target="_blank" rel="noopener" href="https://f-droid.org/packages/com.termux/">https://f-droid.org/packages/com.termux/</a></p>
-<h2 id="2-安装ubuntu"><a href="#2-安装ubuntu" class="headerlink" title="2.安装ubuntu"></a>2.安装ubuntu</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pkg update</span><br><span class="line">pkg install wget proot</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">在想要安装的目录下：</span><br><span class="line">mkdir -p -&#x2F;jails&#x2F;ubuntu</span><br><span class="line">cd ~&#x2F;jails&#x2F;ubuntu</span><br><span class="line">weget https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu&#x2F;master.ubuntu.sh</span><br><span class="line">bash ubuntu.sh</span><br></pre></td></tr></table></figure>
-<p>此脚本中下载ubuntu包的地址已经过期，但是配置操作可以继续执行，在bash前需要先手动下载ubuntu包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget &quot;https:&#x2F;&#x2F;partner-images.canonical.com&#x2F;core&#x2F;focal&#x2F;current&#x2F;ubuntu-focal-core-cloudimg-arm64-root.tar.gz&quot; -O ubuntu.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>运行脚本后，使用<code>./start-ubuntu.sh</code>即可开启root的ubuntu系统</p>
-<h2 id="3-配置ubuntu"><a href="#3-配置ubuntu" class="headerlink" title="3.配置ubuntu"></a>3.配置ubuntu</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt upgrade</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-安装code-server"><a href="#4-安装code-server" class="headerlink" title="4.安装code-server"></a>4.安装code-server</h2><p>在code-server的GitHub的Realease中可以找到最新版arm-64bit的地址，直接使用<code>weget</code>指令下载code-server</p>
-<p>解压，运行code-server：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf</span><br><span class="line"></span><br><span class="line">.&#x2F;code-server --auth none</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-开启VSCode"><a href="#5-开启VSCode" class="headerlink" title="5..开启VSCode"></a>5..开启VSCode</h2><p>本地服务器开启以后即可在浏览器的<code>http://localhost:8080</code>中打开vscode</p>
-
+        
+          <a class="article-more-a" href="/2021/04/29/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/#more">展开全文 >></a>
+        
       
 
       
@@ -461,7 +443,7 @@
 <p>[toc]</p>
 <p>TCP/IP协议簇是互联网的基石</p>
 <p>位Bit——&gt;0/1<br>字节Byte——&gt;8个位<br>字Word——&gt;16个位/2字节<br>双字DWord——&gt;32个位/4字节/2字</p>
-<h2 id="一、TCP-IP协议体系的认知："><a href="#一、TCP-IP协议体系的认知：" class="headerlink" title="一、TCP/IP协议体系的认知："></a>一、TCP/IP协议体系的认知：</h2><p>TCP/IP是封装于系统内，属于内核态的协议栈。<br>TCP/IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层、表示层和应用层。<br>但是这显然是有些复杂的，所以在TCP/IP协议中，它们被简化为了四个层次。 <br>（1）应用层、表示层、会话层三个层次提供的服务相差不是很大，所以在TCP/IP协议中，它们被合并为应用层一个层次。 [1] <br>（2）由于运输层和网络层在网络协议中的地位十分重要，所以在TCP/IP协议中它们被作为独立的两个层次。 [1] <br>（3）因为数据链路层和物理层的内容相差不多，所以在TCP/IP协议中它们被归并在网络接口层一个层次里。只有四层体系结构的TCP/IP协议，与有七层体系结构的OSI相比要简单了不少，也正是这样，TCP/IP协议在实际的应用中效率更高，成本更低。<br><img src="en-resource://database/611:1" alt="6c2cd1113d207f1a431e2bcd74525ff6.png"><br><img src="en-resource://database/609:1" alt="87c6e9df861a05418eb3ef68641ff74d.png"></p>
+<h2 id="一、TCP-IP协议体系的认知："><a href="#一、TCP-IP协议体系的认知：" class="headerlink" title="一、TCP/IP协议体系的认知："></a>一、TCP/IP协议体系的认知：</h2><p>TCP/IP是封装于系统内，属于内核态的协议栈。<br>TCP/IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层、表示层和应用层。<br>但是这显然是有些复杂的，所以在TCP/IP协议中，它们被简化为了四个层次。 <br>（1）应用层、表示层、会话层三个层次提供的服务相差不是很大，所以在TCP/IP协议中，它们被合并为应用层一个层次。 [1] <br>（2）由于运输层和网络层在网络协议中的地位十分重要，所以在TCP/IP协议中它们被作为独立的两个层次。 [1] <br>（3）因为数据链路层和物理层的内容相差不多，所以在TCP/IP协议中它们被归并在网络接口层一个层次里。只有四层体系结构的TCP/IP协议，与有七层体系结构的OSI相比要简单了不少，也正是这样，TCP/IP协议在实际的应用中效率更高，成本更低。</p>
         
           <a class="article-more-a" href="/2021/04/29/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/#more">展开全文 >></a>
         
@@ -730,3 +712,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
   </div>
 </body>
 </html>
+
+

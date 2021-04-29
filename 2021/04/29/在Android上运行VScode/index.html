@@ -16,7 +16,7 @@
 <meta property="og:description" content="在Android上运行VScodetermux-ubuntu项目地址：https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu code-server项目地址：https:&#x2F;&#x2F;github.com&#x2F;cdr&#x2F;code-server 1.下载安装termux因为网络问题install失败，可以在这个网址直接下载完整的安装包：https:&#x2F;&#x2F;f-droid.org&#x2F;package">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-04-29T13:33:43.526Z">
-<meta property="article:modified_time" content="2021-04-29T14:10:07.828Z">
+<meta property="article:modified_time" content="2021-04-29T15:46:48.327Z">
 <meta property="article:author" content="DaftPumpkin">
 <meta name="twitter:card" content="summary">
   
@@ -47,7 +47,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/source/images/头像.jpg" class="js-avatar">
+			<img src="/images/头像.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/"></a></h1>
@@ -86,11 +86,8 @@
 					<a class="douban" target="_blank" href="https://www.douban.com/people/208685573/" title="douban"><i class="icon-douban"></i></a>
 		        
 			</div>
-		</nav>
-	</header>		
-</div>
-
-
+			
+			
             
             
             
@@ -100,6 +97,11 @@
             </div>
             
         
+
+		</nav>
+	</header>		
+</div>
+
 
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
@@ -112,7 +114,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/source/images/头像.jpg" class="js-avatar">
+				<img src="/images/头像.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author"></h1>
@@ -178,7 +180,9 @@
         <h1 id="在Android上运行VScode"><a href="#在Android上运行VScode" class="headerlink" title="在Android上运行VScode"></a>在Android上运行VScode</h1><p>termux-ubuntu项目地址：<a target="_blank" rel="noopener" href="https://github.com/Neo-Oli/termux-ubuntu">https://github.com/Neo-Oli/termux-ubuntu</a></p>
 <p>code-server项目地址：<a target="_blank" rel="noopener" href="https://github.com/cdr/code-server">https://github.com/cdr/code-server</a></p>
 <h2 id="1-下载安装termux"><a href="#1-下载安装termux" class="headerlink" title="1.下载安装termux"></a>1.下载安装termux</h2><p>因为网络问题install失败，可以在这个网址直接下载完整的安装包：<br><a target="_blank" rel="noopener" href="https://f-droid.org/packages/com.termux/">https://f-droid.org/packages/com.termux/</a></p>
-<h2 id="2-安装ubuntu"><a href="#2-安装ubuntu" class="headerlink" title="2.安装ubuntu"></a>2.安装ubuntu</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pkg update</span><br><span class="line">pkg install wget proot</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">在想要安装的目录下：</span><br><span class="line">mkdir -p -&#x2F;jails&#x2F;ubuntu</span><br><span class="line">cd ~&#x2F;jails&#x2F;ubuntu</span><br><span class="line">weget https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu&#x2F;master.ubuntu.sh</span><br><span class="line">bash ubuntu.sh</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h2 id="2-安装ubuntu"><a href="#2-安装ubuntu" class="headerlink" title="2.安装ubuntu"></a>2.安装ubuntu</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pkg update</span><br><span class="line">pkg install wget proot</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在想要安装的目录下：</span><br><span class="line">mkdir -p -&#x2F;jails&#x2F;ubuntu</span><br><span class="line">cd ~&#x2F;jails&#x2F;ubuntu</span><br><span class="line">weget https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu&#x2F;master.ubuntu.sh</span><br><span class="line">bash ubuntu.sh</span><br></pre></td></tr></table></figure>
 <p>此脚本中下载ubuntu包的地址已经过期，但是配置操作可以继续执行，在bash前需要先手动下载ubuntu包：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget &quot;https:&#x2F;&#x2F;partner-images.canonical.com&#x2F;core&#x2F;focal&#x2F;current&#x2F;ubuntu-focal-core-cloudimg-arm64-root.tar.gz&quot; -O ubuntu.tar.gz</span><br></pre></td></tr></table></figure>
 
@@ -534,3 +538,5 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
   </div>
 </body>
 </html>
+
+
