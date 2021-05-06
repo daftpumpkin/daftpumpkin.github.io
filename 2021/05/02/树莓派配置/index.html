@@ -6,30 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://daftpumpkin.github.io">
-  <title>计网复习 | Kevin&#39;s Blog</title>
+  <title>树莓派配置 | Kevin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="计网复习  TCP&#x2F;IP协议簇是互联网的基石 位Bit——&gt;0&#x2F;1字节Byte——&gt;8个位字Word——&gt;16个位&#x2F;2字节双字DWord——&gt;32个位&#x2F;4字节&#x2F;2字 一、TCP&#x2F;IP协议体系的认知：TCP&#x2F;IP是封装于系统内，属于内核态的协议栈。TCP&#x2F;IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层">
+  <meta name="description" content="第一次使用树莓派 一、系统的选择1.根据自己需求选择下载系统，可以在树莓派官网：https:&#x2F;&#x2F;www.raspberrypi.org&#x2F; 查看对应的系统，这里使用官方推荐的系统：Raspberry Pi OS在官网下载种子以后使用其他下载工具可以加速下载。 2.制作系统：使用到balenaEtcher这个软件，一键烧录到TF卡，十分方便。 3.接好外设，上电，先不必配置，因为不换源的话是无法upd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计网复习">
-<meta property="og:url" content="https://daftpumpkin.github.io/2021/04/29/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:title" content="树莓派配置">
+<meta property="og:url" content="https://daftpumpkin.github.io/2021/05/02/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Kevin&#39;s Blog">
-<meta property="og:description" content="计网复习  TCP&#x2F;IP协议簇是互联网的基石 位Bit——&gt;0&#x2F;1字节Byte——&gt;8个位字Word——&gt;16个位&#x2F;2字节双字DWord——&gt;32个位&#x2F;4字节&#x2F;2字 一、TCP&#x2F;IP协议体系的认知：TCP&#x2F;IP是封装于系统内，属于内核态的协议栈。TCP&#x2F;IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层">
+<meta property="og:description" content="第一次使用树莓派 一、系统的选择1.根据自己需求选择下载系统，可以在树莓派官网：https:&#x2F;&#x2F;www.raspberrypi.org&#x2F; 查看对应的系统，这里使用官方推荐的系统：Raspberry Pi OS在官网下载种子以后使用其他下载工具可以加速下载。 2.制作系统：使用到balenaEtcher这个软件，一键烧录到TF卡，十分方便。 3.接好外设，上电，先不必配置，因为不换源的话是无法upd">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image1.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image2.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image3.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image4.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image5.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image6.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image7.png">
-<meta property="og:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image8.png">
-<meta property="article:published_time" content="2021-04-29T13:31:54.424Z">
-<meta property="article:modified_time" content="2021-04-29T16:29:16.193Z">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image1.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image2.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image3.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image4.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image5.png">
+<meta property="article:published_time" content="2021-05-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-06T15:21:55.187Z">
 <meta property="article:author" content="DaftPumpkin">
-<meta property="article:tag" content="技术记录">
+<meta property="article:tag" content="-Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://daftpumpkin.github.io/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image.png">
+<meta name="twitter:image" content="https://daftpumpkin.github.io/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image.png">
   
     <link rel="alternative" href="/atom.xml" title="Kevin&#39;s Blog" type="application/atom+xml">
   
@@ -172,116 +169,53 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-计网复习" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-树莓派配置" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      计网复习
+      树莓派配置
     </h1>
   
 
         
-        <a href="/2021/04/29/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2021-04-29T13:31:54.424Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-29</time>
+        <a href="/2021/05/02/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2021-05-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-02</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>计网复习</strong></p>
-<hr>
-<p>TCP/IP协议簇是互联网的基石</p>
-<p>位Bit——&gt;0/1<br>字节Byte——&gt;8个位<br>字Word——&gt;16个位/2字节<br>双字DWord——&gt;32个位/4字节/2字</p>
-<h2 id="一、TCP-IP协议体系的认知："><a href="#一、TCP-IP协议体系的认知：" class="headerlink" title="一、TCP/IP协议体系的认知："></a>一、TCP/IP协议体系的认知：</h2><p>TCP/IP是封装于系统内，属于内核态的协议栈。<br>TCP/IP协议在一定程度上参考了OSI的体系结构。OSI模型共有七层，从下到上分别是：物理层、数据链路层、网络层、运输层、会话层、表示层和应用层。<br>但是这显然是有些复杂的，所以在TCP/IP协议中，它们被简化为了四个层次。 <br>（1）应用层、表示层、会话层三个层次提供的服务相差不是很大，所以在TCP/IP协议中，它们被合并为应用层一个层次。 [1] <br>（2）由于运输层和网络层在网络协议中的地位十分重要，所以在TCP/IP协议中它们被作为独立的两个层次。 [1] <br>（3）因为数据链路层和物理层的内容相差不多，所以在TCP/IP协议中它们被归并在网络接口层一个层次里。只有四层体系结构的TCP/IP协议，与有七层体系结构的OSI相比要简单了不少，也正是这样，TCP/IP协议在实际的应用中效率更高，成本更低。</p>
+        <p>第一次使用树莓派</p>
+<h1 id="一、系统的选择"><a href="#一、系统的选择" class="headerlink" title="一、系统的选择"></a>一、系统的选择</h1><p>1.根据自己需求选择下载系统，可以在树莓派官网：<a target="_blank" rel="noopener" href="https://www.raspberrypi.org/">https://www.raspberrypi.org/</a> 查看对应的系统，这里使用官方推荐的系统：Raspberry Pi OS<br>在官网下载种子以后使用其他下载工具可以加速下载。</p>
+<p>2.制作系统：使用到<code>balenaEtcher</code>这个软件，一键烧录到TF卡，十分方便。</p>
+<p>3.接好外设，上电，先不必配置，因为不换源的话是无法update的。</p>
 <span id="more"></span>
 
-<p><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image.png" alt="6c2cd1113d207f1a431e2bcd74525ff6.png"><br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image1.png" alt="87c6e9df861a05418eb3ef68641ff74d.png"></p>
-<h2 id="二、数据链路层（从底层往高层-）"><a href="#二、数据链路层（从底层往高层-）" class="headerlink" title="二、数据链路层（从底层往高层 ）"></a>二、数据链路层（从底层往高层 ）</h2><h3 id="1-以太网帧的格式："><a href="#1-以太网帧的格式：" class="headerlink" title="1.以太网帧的格式："></a>1.以太网帧的格式：</h3><p>以<u>太网链路传输的数据包</u>称做以太帧，或者以太网数据帧。在以太网中，网络访问层的软件必须把数据转换成能够通过网络适配器硬件进行传输的格式。</p>
-<p><u>以太帧的工作机制：</u><br>当以太网软件从网络层接收到数据报之后，需要完成如下操作：</p>
-<ol>
-<li><p>根据需要把网际层的数据分解为较小的块，以符合以太网帧数据段的要求。以太网帧的整体大小必须在<u> 64～1518 字节</u>之间（不包含前导码）。有些系统支持更大的帧，最大可以支持 9000 字节。有些系统支持更大的帧，最大可以支持 9000 字节。</p>
-</li>
-<li><p>把数据块打包成帧。每一帧都包含数据及其他信息，这些信息是以太网网络适配器处理帧所需要的。</p>
-</li>
-<li><p>把数据帧传递给对应于 OSI 模型物理层的底层组件，后者把帧转换为比特流，并且通过传输介质发送出去。</p>
-</li>
-<li><p>以太网上的其他网络适配器接收到这个帧，检查其中的目的地址。如果目的地址与网络适配器的地址相匹配，适配器软件就会处理接收到的帧，把数据传递给协议栈中较高的层。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image2.png" alt="ef33e35addabcf9e8d1dc8bdc64e8abe.png"></p>
-</li>
-</ol>
-<p>802.3协议以太网帧格式</p>
-<blockquote>
-<p>参考于<a target="_blank" rel="noopener" href="https://www.pianshen.com/article/532043479/">https://www.pianshen.com/article/532043479/</a></p>
-</blockquote>
-<p>CRC循环冗余检验</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Jz4y1C7La?p=2&amp;share_source=copy_web">https://www.bilibili.com/video/BV1Jz4y1C7La?p=2&amp;share_source=copy_web</a></p>
-</blockquote>
-<h3 id="2-最大传输单元（MTU）："><a href="#2-最大传输单元（MTU）：" class="headerlink" title="2.最大传输单元（MTU）："></a>2.最大传输单元（MTU）：</h3><p>用来通知对方所能接受数据服务单元的最大尺寸，说明发送方能够接受的有效载荷大小。</p>
-<p>是包或帧的最大长度，一般以字节记。如果MTU过大，在碰到路由器时会被拒绝转发，因为它不能处理过大的包。如果太小，因为协议一定要在包(或帧)上加上包头，那实际传送的数据量就会过小，这样也划不来。大部分操作系统会提供给用户一个默认值，该值一般对用户是比较合适的。</p>
-<p>802.3对数据帧的长度都有一个限制，其最大值分别是1500字节和1492字节。链路层的这个特性称为MTU，即最大传输单元。不同类型网络的数帧长度大多数都有一个上限。如果IP层有一个数据报要传，而且数据帧的长度比链路层的MTU还大，那么IP层就需要进行分片( fragmentation)，即把数据报分成干片，这样每一片就都小于MTU。</p>
-<h3 id="3-ARP-RARP协议："><a href="#3-ARP-RARP协议：" class="headerlink" title="3.ARP/RARP协议："></a>3.ARP/RARP协议：</h3><h4 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h4><p>ARP协议是“Address Resolution Protocol”（地址解析协议）的缩写。其作用是在以太网环境中，数据的传输所依懒的是MAC地址而非IP地址，而将已知IP地址转换为MAC地址的工作是由ARP协议来完成的。</p>
-<p>根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到局域网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。地址解析协议是建立在网络中各个主机互相信任的基础上的</p>
-<p>OSI模型把网络工作分为七层，IP地址在OSI模型的第三层，MAC地址在第二层，彼此不直接打交道。在通过以太网发送IP数据包时，需要先封装第三层（32位IP地址）、第二层（48位MAC地址）的报头，但由于发送时只知道目标IP地址，不知道其MAC地址，又不能跨第二、三层，所以需要使用地址解析协议。使用地址解析协议，可根据网络层IP数据包包头中的IP地址信息解析出目标硬件地址（MAC地址）信息，以保证通信的顺利进行。</p>
-<p>1.报文格式<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image3.png" alt="d0908b35346220454050fe64ca7b173c.png"></p>
-<p>2.ARP查询原理</p>
-<p>主机A的IP地址为192.168.1.1，MAC地址为0A-11-22-33-44-01；<br>主机B的IP地址为192.168.1.2，MAC地址为0A-11-22-33-44-02；<br>当主机A要与主机B通信时，地址解析协议可以将主机B的IP地址（192.168.1.2）解析成主机B的MAC地址，以下为工作流程：</p>
-<p>第1步：根据主机A上的路由表内容，IP确定用于访问主机B的转发IP地址是192.168.1.2。然后A主机在自己的本地ARP缓存中检查主机B的匹配MAC地址。</p>
-<p>第2步：如果主机A在ARP缓存中没有找到映射，它将询问192.168.1.2的硬件地址，从而将ARP请求帧广播到本地网络上的所有主机。源主机A的IP地址和MAC地址都包括在ARP请求中。本地网络上的每台主机都接收到ARP请求并且检查是否与自己的IP地址匹配。如果主机发现请求的IP地址与自己的IP地址不匹配，它将丢弃ARP请求。</p>
-<p>第3步：主机B确定ARP请求中的IP地址与自己的IP地址匹配，则将主机A的IP地址和MAC地址映射添加到本地ARP缓存中。</p>
-<p>第4步：主机B将包含其MAC地址的ARP回复消息直接发送回主机A。</p>
-<p>第5步：当主机A收到从主机B发来的ARP回复消息时，会用主机B的IP和MAC地址映射更新ARP缓存。本机缓存是有生存期的，生存期结束后，将再次重复上面的过程。主机B的MAC地址一旦确定，主机A就能向主机B发送IP通信了。</p>
-<p>3.ARP缓存</p>
-<p>ARP缓存是个用来储存IP地址和MAC地址的缓冲区，其本质就是一个IP地址–&gt;MAC地址的对应表，表中每一个条目分别记录了网络上其他主机的IP地址和对应的MAC地址。每一个以太网或令牌环网络适配器都有自己单独的表。当地址解析协议被询问一个已知IP地址节点的MAC地址时，先在ARP缓存中查看，若存在，就直接返回与之对应的MAC地址，若不存在，才发送ARP请求向局域网查询。<br>为使广播量最小，ARP维护IP地址到MAC地址映射的缓存以便将来使用。ARP缓存可以包含动态和静态项目。动态项目随时间推移自动添加和删除。每个动态ARP缓存项的潜在生命周期是10分钟。新加到缓存中的项目带有时间戳，如果某个项目添加后2分钟内没有再使用，则此项目过期并从ARP缓存中删除；如果某个项目已在使用，则又收到2分钟的生命周期；如果某个项目始终在使用，则会另外收到2分钟的生命周期，一直到10分钟的最长生命周期。静态项目一直保留在缓存中，直到重新启动计算机为止。</p>
-<h4 id="RARP"><a href="#RARP" class="headerlink" title="RARP"></a>RARP</h4><p>地址解析协议是根据IP地址获取物理地址的协议，而反向地址转换协议（RARP）是局域网的物理机器从网关服务器的ARP表或者缓存上根据MAC地址请求IP地址的协议，其功能与地址解析协议相反。与ARP相比，RARP的工作流程也相反。首先是查询主机向网路送出一个RARP Request广播封包，向别的主机查询自己的IP地址。这时候网络上的RARP服务器就会将发送端的IP地址用RARP Reply封包回应给查询者，这样查询主机就获得自己的IP地址了。</p>
-<h2 id="三、网络层"><a href="#三、网络层" class="headerlink" title="三、网络层"></a>三、网络层</h2><p>不同于电信网的面向连接的通信方式所提供的可靠传输的服务，网络层向上只提供简单灵活的、无连接的、尽最大努力交付的数据报服务。</p>
-<p>IP位于TCP/IP模型的网络层(相当于OSI模型的网络层)，它可以向传输层提供各种协议的信息，例如TCP、UDP等；对下可将IP信息包放到链路层，通过以太网、令牌环网络等各种技术来传送。</p>
-<p>为了能适应异构网络，IP强调适应性、简洁性和可操作性，并在可靠性做了一定的牺牲。IP不保证分组的交付时限和可靠性，所传送分组有可能出现丢失、重复、延迟或乱序等问题。</p>
-<h3 id="1-IP首部格式："><a href="#1-IP首部格式：" class="headerlink" title="1.IP首部格式："></a>1.IP首部格式：</h3><p><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image4.png" alt="b5d6c2626ad11990693eecc7ed2b95cc.png"></p>
-<p>16位分片标识<br>DF不分片标志<br>MF更多分片标志<br>13位片偏移<br>8位生存时间TTL<br>16位的首部检验和</p>
-<h3 id="2-IP分片："><a href="#2-IP分片：" class="headerlink" title="2.IP分片："></a>2.IP分片：</h3><p>当IP数据报超过帧的MTU(1500)(最大传输单元)时，它将会被分片传输。分片能发生在发送端或者中转路由器，且在传输过程中可能被多次分片。在最后的目标机器上这些分片才会被内核的的IP模块重新组装。</p>
-<h4 id="分片情况"><a href="#分片情况" class="headerlink" title="分片情况"></a>分片情况</h4><p><u>IP分片发生在IP层</u>，不仅源端主机会进行分片，中间的路由器也有可能分片，因为不同的网络的MTU是不一样的，如果传输路径上的某个网络的MTU比源端网络的MTU要小，路由器就可能对IP数据报再次进行分片。而分片数据的重组只会发生在目的端的IP层。</p>
-<p>一般IP首部为20字节，UDP首部为8字节，数据的净荷（payload）部分预留是1500-20-8=1472字节。如果数据部分大于1472字节，就会出现分片现象。</p>
-<p>在IP首部有4个字节是用于分片的，如下图所示。前16位是IP数据报的标识，同一个数据报的各个分片的标识是一样的，目的端会根据这个标识来判断IP分片是否属于同一个IP数据报。中间3位是标志位，其中有1位用来表示是否有更多的分片，如果是最后一个分片，该标志位为0，否则为1。后面13位表示分片在原始数据的偏移，这里的原始数据是IP层收到的传输的TCP或UDP数据，不包含IP首部。<br>需要注意的，在分片的数据中，传输层的首部只会出现在第一个分片中，如下图所示。因为传输层的数据格式对IP层是透明的，传输层的首部只有在传输层才会有它的作用，IP层不知道也不需要保证在每个分片中都有传输层首部。所以，在网络上传输的数据包是有可能没有传输层首部的。</p>
-<h4 id="如何避免IP分片"><a href="#如何避免IP分片" class="headerlink" title="如何避免IP分片"></a>如何避免IP分片</h4><p>在网络编程中，我们要避免出现IP分片，那么为什么要避免呢？原因是IP层是没有超时重传机制的，如果IP层对一个数据包进行了分片，只要有一个分片丢失了，只能依赖于传输层进行重传，结果是所有的分片都要重传一遍，这个代价有点大。由此可见，IP分片会大大降低传输层传送数据的成功率，所以我们要避免IP分片。<br>对于UDP包，我们需要在应用层去限制每个包的大小，一般不要超过1472字节，即以太网MTU（1500）—UDP首部（8）—IP首部（20）。<br>对于TCP数据，应用层就不需要考虑这个问题了，因为传输层已经帮我们做了。在建立连接的三次握手的过程中，连接双方会相互通告MSS（Maximum Segment Size，最大报文段长度），MSS一般是MTU—IP首部（20）—TCP首部（20），每次发送的TCP数据都不会超过双方MSS的最小值，所以就保证了IP数据报不会超过MTU，避免了IP分片。</p>
-<h4 id="如何确定分片顺序"><a href="#如何确定分片顺序" class="headerlink" title="如何确定分片顺序"></a>如何确定分片顺序</h4><h4 id="接收端如何确定所有分片都到达"><a href="#接收端如何确定所有分片都到达" class="headerlink" title="接收端如何确定所有分片都到达"></a>接收端如何确定所有分片都到达</h4><h4 id="IP选路"><a href="#IP选路" class="headerlink" title="IP选路"></a>IP选路</h4><h4 id="路由表的含义"><a href="#路由表的含义" class="headerlink" title="路由表的含义"></a>路由表的含义</h4><h3 id="3-ICMP协议："><a href="#3-ICMP协议：" class="headerlink" title="3.ICMP协议："></a>3.ICMP协议：</h3><p>ICMP（Internet Control Message Protocol）Internet控制报文协议。它是TCP/IP协议簇的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。</p>
-<p>ICMP使用IP的基本支持，就像它是一个更高级别的协议，但是，ICMP实际上是IP的一个组成部分，必须由每个IP模块实现。</p>
-<h4 id="ICMP报文格式"><a href="#ICMP报文格式" class="headerlink" title="ICMP报文格式"></a>ICMP报文格式</h4><p>ICMP报文包含在IP数据报中，属于IP的一个用户，IP头部就在ICMP报文的前面，所以一个ICMP报文包括IP头部、ICMP头部和ICMP报文，IP头部的Protocol值为1就说明这是一个ICMP报文，ICMP头部中的类型（Type）域用于说明ICMP报文的作用及格式，此外还有一个代码（Code）域用于详细说明某种ICMP报文的类型，所有数据都在ICMP头部后面。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image5.png" alt="7674c05b00910d728f03113e82a1e3ef.png"></p>
-<h4 id="ICMP报文分两类：查询-2种-查错-5种"><a href="#ICMP报文分两类：查询-2种-查错-5种" class="headerlink" title="ICMP报文分两类：查询(2种)+查错(5种)"></a>ICMP报文分两类：查询(2种)+查错(5种)</h4><h2 id="四、传输层"><a href="#四、传输层" class="headerlink" title="四、传输层"></a>四、传输层</h2><h3 id="1-UDP协议的特点"><a href="#1-UDP协议的特点" class="headerlink" title="1.UDP协议的特点"></a>1.UDP协议的特点</h3><p>Internet 的传输层有两个主要协议，互为补充。无连接的是 UDP，它除了给应用程序发送数据包功能并允许它们在所需的层次上架构自己的协议之外，几乎没有做什么特别的事情。面向连接的是 TCP，该协议几乎做了所有的事情。</p>
-<p>用户数据报协议（UDP，User Datagram Protocol）。UDP 为应用程序提供了一种无需建立连接就可以发送封装的 IP 数据包的方法。<br>它主要用于不要求分组顺序到达的传输中，分组传输顺序的检查与排序由应用层完成，提供面向事务的简单不可靠信息传送服务。UDP 协议基本上是IP协议与上层协议的接口。UDP协议适用端口分别运行在同一台设备上的多个应用程序。</p>
-<p>首部字段<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image6.png" alt="2f5ce1966024cba0eec3a405a9796c57.png"></p>
-<h3 id="2-TCP协议"><a href="#2-TCP协议" class="headerlink" title="2.TCP协议"></a>2.<u>TCP协议</u></h3><p>特点</p>
-<p>传输控制协议（TCP，Transmission Control Protocol）是为了在不可靠的互联网络上提供可靠的端到端字节流而专门设计的一个传输协议。</p>
-<p>首部字段<br>可靠机制</p>
-<h3 id="3-TCP的连接控制："><a href="#3-TCP的连接控制：" class="headerlink" title="3.TCP的连接控制："></a>3.<u>TCP的连接控制</u>：</h3><h4 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h4><p>TCP是因特网中的传输层协议，使用三次握手协议建立连接。当主动方发出SYN连接请求后，等待对方回答SYN+ACK，并最终对对方的 SYN 执行 ACK 确认。这种建立连接的方法可以防止产生错误的连接，TCP使用的流量控制协议是可变大小的滑动窗口协议。</p>
-<p>TCP三次握手的过程如下：<br>1.客户端发送SYN（SEQ=x）报文给服务器端，进入SYN_SEND状态。<br>2.服务器端收到SYN报文，回应一个SYN （SEQ=y）ACK（ACK=x+1）报文，进入SYN_RECV状态。<br>3.客户端收到服务器端的SYN报文，回应一个ACK（ACK=y+1）报文，进入Established状态。<br>三次握手完成，TCP客户端和服务器端成功地建立连接，可以开始传输数据了。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image7.png" alt="6edd97f611269a37857246922d558afc.png"></p>
-<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><p>建立一个连接需要三次握手，而终止一个连接要经过四次握手，这是由TCP的半关闭（half-close）造成的。具体过程如下图所示。</p>
-<ol>
-<li>某个应用进程首先调用close，称该端执行“主动关闭”（active close）。该端的TCP于是发送一个FIN分节，表示数据发送完毕。</li>
-<li>接收到这个FIN的对端执行 “被动关闭”（passive close），这个FIN由TCP确认。<br>注意：FIN的接收也作为一个文件结束符（end-of-file）传递给接收端应用进程，放在已排队等候该应用进程接收的任何其他数据之后，因为，FIN的接收意味着接收端应用进程在相应连接上再无额外数据可接收。</li>
-<li>一段时间后，接收到这个文件结束符的应用进程将调用close关闭它的套接字。这导致它的TCP也发送一个FIN。</li>
-<li>接收这个最终FIN的原发送端TCP（即执行主动关闭的那一端）确认这个FIN。<br>既然每个方向都需要一个FIN和一个ACK，因此通常需要4个分节。<br><img src="/images/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/Image8.png" alt="07bf5cd028fcc520d56346c72689d009.png"></li>
-</ol>
-<p>同时打开<br>同时关闭<br>半关闭</p>
-<h3 id="4-TCP流量控制机制："><a href="#4-TCP流量控制机制：" class="headerlink" title="4.TCP流量控制机制："></a>4.<u>TCP流量控制机制</u>：</h3><p>滑动窗口<br>慢启动<br>拥塞避免<br>快速重传<br>快速恢复</p>
-<h3 id="5-超时重传机制："><a href="#5-超时重传机制：" class="headerlink" title="5.超时重传机制："></a>5.超时重传机制：</h3><p>各种定时器</p>
-<h3 id="6-面试中常见的问题："><a href="#6-面试中常见的问题：" class="headerlink" title="6.面试中常见的问题："></a>6.面试中常见的问题：</h3><h4 id="1-为什么需要3次握手，4次挥手"><a href="#1-为什么需要3次握手，4次挥手" class="headerlink" title="1.为什么需要3次握手，4次挥手"></a>1.为什么需要3次握手，4次挥手</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xifeijian/article/details/12777187">https://blog.csdn.net/xifeijian/article/details/12777187</a></p>
-<h4 id="2-为什么TCP-UDP都存在伪包头"><a href="#2-为什么TCP-UDP都存在伪包头" class="headerlink" title="2.为什么TCP/UDP都存在伪包头"></a>2.为什么TCP/UDP都存在伪包头</h4><p>UDP计算校验和的方法和计算IP数据报首部校验和的方法相似。 但不同的是：IP数据报的校验和只检验IP数据报的首部，但UDP的校验和是将首部和数据部分一起都检验。 在发送端，首先是将全零放入检验和字段。再将伪首部以及UDP用户数据报看成是由许多16bit的字串接起来。 若UDP用户数据报的数据部分不是偶数个字节，则要填入一个全零字节(即：最后一个基数字节应是16位数的高字节而低字节填0)。 然后按二进制反码计算出这些16bit字的和(两个数进行二进制反码求和的运算的规则是：从低位到高位逐列进行计算。 0和0相加是0，0和1相加是1，1和1相加是0但要产生一个进位1，加到下一列。若最高位相加后产生进位，则最后得到的结果要加1)。 将此和的二进制反码写入校验和字段后，发送此UDP用户数据报。 在接收端，将收到的UDP用户数据报连同伪首部(以及可能的填充全零字节)一起，按二进制反码求这些16bit字的和。 当无差错时其结果应全为1。否则就表明有差错出现， 接收端就应将此UDP用户数据报丢弃(也可以上交给应用层，但附上出现了差错的警告)。 TCP 的校验和计算方法同UDP一样，同样要加上一个伪头部，区别是伪头部的协议码是0x06，长度是整个TCP报文的长度（包含TCP头部）。 ICMP的校验和 ICMP校验和的计算方法一样，只不过只是对ICMP包整个进行校验和，没有伪头部，也不包括IP包头部。</p>
-<h4 id="3-TCP与UDP的对比"><a href="#3-TCP与UDP的对比" class="headerlink" title="3.TCP与UDP的对比"></a>3.TCP与UDP的对比</h4><p>TCP 是面向连接的传输控制协议，而UDP 提供了无连接的数据报服务；TCP 具有高可靠性，确保传输数据的正确性，不出现丢失或乱序；UDP 在传输数据前不建立连接，不对数据报进行检查与修改，无须等待对方的应答，所以会出现分组丢失、重复、乱序，应用程序需要负责传输可靠性方面的所有工作；UDP 具有较好的实时性，工作效率较 TCP 协议高；UDP 段结构比 TCP 的段结构简单，因此网络开销也小。TCP 协议可以保证接收端毫无差错地接收到发送端发出的字节流，为应用程序提供可靠的通信服务。对可靠性要求高的通信系统往往使用 TCP 传输数据。比如 HTTP 运用 TCP 进行数据的传输。</p>
-<h2 id="五、应用层"><a href="#五、应用层" class="headerlink" title="五、应用层"></a>五、应用层</h2><h3 id="1-DNS："><a href="#1-DNS：" class="headerlink" title="1.DNS："></a>1.<u>DNS</u>：</h3><p>域名系统(Domain Name System,DNS)是Internet上解决网上机器命名的一种系统。就像拜访朋友要先知道别人家怎么走一样，Internet上当一台主机要访问另外一台主机时，必须首先获知其地址，TCP/IP中的IP地址是由四段以“.”分开的数字组成(此处以IPv4的地址为例，IPv6的地址同理)，记起来总是不如名字那么方便，所以，就采用了域名系统来管理名字和IP的对应关系。</p>
-<p>DNS的名字空间<br>DNS指针查询（反向查找或逆向解析）的基本原理<br>DNS缓存</p>
-<h3 id="2-FTP协议："><a href="#2-FTP协议：" class="headerlink" title="2.FTP协议："></a>2.FTP协议：</h3><p>控制连接+数据连接，为什么需要控制流数据流<br>两种工作模式：PASV+PORT<br>各种FTP指令和响应码<br>FTP断点续传，匿名FTP</p>
-<h3 id="3-HTTP协议："><a href="#3-HTTP协议：" class="headerlink" title="3.HTTP协议："></a>3.<u>HTTP协议</u>：</h3><p>超文本传输协议（Hypertext Transfer Protocol，HTTP）是一个简单的请求-响应协议，它通常运行在TCP之上。它指定了客户端可能发送给服务器什么样的消息以及得到什么样的响应。请求和响应消息的头以ASCII形式给出；而消息内容则具有一个类似MIME的格式。这个简单模型是早期Web成功的有功之臣，因为它使开发和部署非常地直截了当。</p>
-<p>HTTP是基于客户/服务器模式，且面向连接的。典型的HTTP事务处理有如下的过程： [7] <br>（1）客户与服务器建立连接；<br>（2）客户向服务器提出请求；<br>（3）服务器接受请求，并根据请求返回相应的文件作为应答；<br>（4）客户与服务器关闭连接。<br>客户与服务器之间的HTTP连接是一种一次性连接，它限制每次连接只处理一个请求，当服务器返回本次请求的应答后便立即关闭连接，下次请求再重新建立连接。这种一次性连接主要考虑到WWW服务器面向的是Internet中成干上万个用户，且只能提供有限个连接，故服务器不会让一个连接处于等待状态，及时地释放连接可以大大提高服务器的执行效率。 [7] <br>HTTP是一种无状态协议，即服务器不保留与客户交易时的任何状态。这就大大减轻了服务器记忆负担，从而保持较快的响应速度。HTTP是一种面向对象的协议。允许传送任意类型的数据对象。它通过数据类型和长度来标识所传送的数据内容和大小，并允许对数据进行压缩传送。当用户在一个HTML文档中定义了一个超文本链后，浏览器将通过TCP/IP协议与指定的服务器建立连接。 [7] <br>HTTP支持持久连接，在HTTP / 0.9和1.0中，连接在单个请求/响应对之后关闭。在HTTP / 1.1中，引入了保持活动机制，其中连接可以重用于多个请求。这样的持久性连接可以明显减少请求延迟，因为在发送第一个请求之后，客户端不需要重新协商TCP 3-Way-Handshake连接。另一个积极的副作用是，通常，由于TCP的缓慢启动机制，连接随着时间的推移而变得更快。<br>该协议的1.1版还对HTTP / 1.0进行了带宽优化改进。例如，HTTP / 1.1引入了分块传输编码，以允许流传输而不是缓冲持久连接上的内容。HTTP流水线进一步减少了延迟时间，允许客户端在等待每个响应之前发送多个请求。协议的另一项附加功能是字节服务，即服务器仅传输客户端明确请求的资源部分。<br>从技术上讲是客户在一个特定的TCP端口（端口号一般为80）上打开一个套接字。如果服务器一直在这个周知的端口上倾听连接，则该连接便会建立起来。然后客户通过该连接发送一个包含请求方法的请求块。<br>HTTP规范定义了9种请求方法，每种请求方法规定了客户和服务器之间不同的信息交换方式，常用的请求方法是GET和POST。服务器将根据客户请求完成相应操作，并以应答块形式返回给客户，最后关闭连接。</p>
-<p>报文格式：请求报文、响应报文、请求头各种字段、响应头各种字段</p>
-<p>HTTP报文由从客户机到服务器的请求和从服务器到客户机的响应构成。请求报文格式如下： [6] <br>请求行 － 通用信息头 － 请求头 － 实体头 － 报文主体<br>请求行以方法字段开始，后面分别是 URL 字段和 HTTP 协议版本字段，并以 CRLF 结尾。SP 是分隔符。除了在最后的 CRLF 序列中 CF 和 LF 是必需的之外，其他都可以不要。有关通用信息头，请求头和实体头方面的具体内容可以参照相关文件。<br>应答报文格式如下：<br>状态行 － 通用信息头 － 响应头 － 实体头 － 报文主体<br>状态码元由3位数字组成，表示请求是否被理解或被满足。原因分析是对原文的状态码作简短的描述，状态码用来支持自动操作，而原因分析用来供用户使用。客户机无需用来检查或显示语法。有关通用信息头，响应头和实体头方面的具体内容可以参照相关文件。</p>
-<p>HTTP状态码</p>
-<h3 id="4-HTTPS协议："><a href="#4-HTTPS协议：" class="headerlink" title="4.HTTPS协议："></a>4.HTTPS协议：</h3><p>详细的握手过程<br>摘要算法、数字签名、数字证书的原理和过程</p>
-<h2 id="六、面试常见问题"><a href="#六、面试常见问题" class="headerlink" title="六、面试常见问题"></a>六、面试常见问题</h2><h3 id="分层的概念"><a href="#分层的概念" class="headerlink" title="分层的概念"></a>分层的概念</h3><p><strong>问题 1：OSI 有哪几层，会画出来，知道主要几层的各自作用</strong> <br>1. 应用层（数据）：确定进程之间通信的性质以满足用户需要以及提供网络与用户应用2. 表示层（数据）：主要解决拥护信息的语法表示问题，如加密解密3. 会话层（数据）：提供包括访问验证和会话管理在内的建立和维护应用之间通信的机<br>制，如服务器验证用户登录便是由会话层完成的4. 传输层（段）：实现网络不同主机上用户进程之间的数据通信，可靠<br>与不可靠的传输，传输层的错误检测，流量控制等5. 网络层（包）：提供逻辑地址（IP）、选路，数据从源端到目的端的<br>传输6. 数据链路层（帧）：将上层数据封装成帧，用 MAC 地址访问媒介，错误检测与修正7. 物理层（比特流）：设备之间比特流的传输，物理接口，电气特性等<br><strong>问题 2：知道各个层使用的是哪个数据交换设备。（交换机、路由器、网关）</strong><br>1. 网关：应用层、传输层（网关在传输层上以实现网络互连，是最复杂的网络互连设备，仅用于两个高层协议不同的网络互连。网关的结构也和路由器类似，不同的是互连层。网关既可以用于广域网互连，也可以用于局域网互连）2. 路由器：网络层（路由选择、存储转发）3. 交换机：数据链路层、网络层（识别数据包中的 MAC 地址信息，根据 MAC 地址进行转发，并将这些 MAC 地址与对应的端口记录在自己内部的一个地址表中）4. 网桥：数据链路层（将两个 LAN 连起来，根据 MAC 地址来转发帧）5. 集线器（Hub）：物理层（纯硬件设备，主要用来连接计算机等网络端）6. 中继器：物理层（在比特级别对网络信号进行再生和重定时，从而使得它们能够在网络上传输更长的距离）</p>
-<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><h4 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h4><p><strong>问题 1：ARP 的作用？</strong>    <br>ARP 为 IP 地址到对应的硬件地址提供动态映射。<br><strong>问题 2：点对点链路使用 ARP 吗？</strong>   <br>不使用<br><strong>问题 3：ARP 高效运行的关键是什么？</strong>    <br>关键是每个主机上都有一个 ARP 的高速缓存。问题 4：ARP 报文的各个字段以及含义？<br><strong>问题 4：ARP 报文的各个字段以及含义？</strong>    </p>
+<h1 id="二、换源："><a href="#二、换源：" class="headerlink" title="二、换源："></a>二、换源：</h1><p>这里选择清华源：<a target="_blank" rel="noopener" href="https://mirror.tuna.tsinghua.edu.cn/help/raspbian/">https://mirror.tuna.tsinghua.edu.cn/help/raspbian/</a><br>（1）在命令行窗口内输入 sudo nano /etc/apt/sources.list 并回车，进入编辑器。（nano是系统内置的轻量化文本编辑器）</p>
+<p>（2）按照清华源网站中给出的网址修改，按 ctrl-o 保存，按 ctrl-x 关闭。</p>
+<p>（3）同样的方法，把<code> /etc/apt/sources.list.d/raspi.list </code>文件也替换好。</p>
+<p>（4）惯例：<code>sudo apt-get update</code></p>
+<h1 id="三、配置系统："><a href="#三、配置系统：" class="headerlink" title="三、配置系统："></a>三、配置系统：</h1><p>（1）更改显存大小，需要图形化操作界面和播放视频一般需要512Mb的显存。</p>
+<p>（2）<strong>在<code>sudo raspi-config</code>下的进阶选项中扩展文件空间</strong></p>
+<p>（3）在命令行模式中使用<code>sudo raspi config</code>进入配置菜单，将显示分辨率和去黑边等配置好。（也可以通过图形化界面中的设置菜单调整）</p>
+<p>（3）安装中文输入法：<br>谷歌拼音输入法：</p>
+<p><code>apt install -y fcitx fcitx-googlepinyin</code><br>reboot生效</p>
+<p>重启完成后需要添加一下中文输入法，点击左上角树莓图标进入<code>Preference -&gt; Fcitx Configuration</code></p>
+<p>可以利用跟Windows切换输入法一样Ctrl + 空格来切换输入法了。</p>
+<p>散热贴是很有必要的：<br>查看温度的指令：<code>vcgencmd measure_temp</code></p>
+<h1 id="四、部署本地有线SSH和VNC"><a href="#四、部署本地有线SSH和VNC" class="headerlink" title="四、部署本地有线SSH和VNC"></a>四、部署本地有线SSH和VNC</h1><p>1.在控制台<code>sudo raspi-config</code>打开设置菜单&gt;interface options中打开SSH和VNC</p>
+<p>2.插接好网口，共享以太网：<br><img src="/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image.png" alt="c1d6c99eb59a60e3379bf4ebbbd0117d.png"><br><img src="/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image1.png" alt="aa63aa44e3b0dde35bdee6284c5c5fae.png"><br>这样树莓派就可以使用笔记本连接上的WIFI了</p>
+<p>3.查看树莓派网口的ip：<br><img src="/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image2.png" alt="5c4d1894fdd33a9323ccec0b7ea9e28f.png"><br>是在192.168.0.1端口下</p>
+<p>那么再打开cmd，执行<code>arp -a</code><br><img src="/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image3.png" alt="574e4a410442525e36562554c81f3396.png"><br>在192.168.0.1端口下第一个ip即是树莓派的ip地址，复制到puTTy和VNC Viewer中就可以访问树莓派了</p>
+<h1 id="五、部署无线SSH和VNC"><a href="#五、部署无线SSH和VNC" class="headerlink" title="五、部署无线SSH和VNC"></a>五、部署无线SSH和VNC</h1><p>1.打开命令行，输入以下命令，<code>sudo nano /etc/dhcpcd.conf</code><br><img src="/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image4.png" alt="b94314624e50b98fd9e039700ad3f5e1.png"><br>2.将WLAN0的静态IP设置到如下图，我们电脑的同一网段之下：<br><img src="/images/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/Image5.png" alt="715cedca28743fcde8a54dca2b544f77.png"></p>
+<p>3.reboot以后使用<code>ifconfig</code>查看WLAN的IP是否已经设置成功。</p>
+<p>4.打开puTTY或者VNC Viewer就可以连接到树莓派了。</p>
+<p>注意：手动静态IP要注意不能跟路由器DHCP所自动分配的IP冲突，否则树莓派就有可能无法正常联网。还有要跟电脑同一网段，否则无法远程登陆。 </p>
+<h1 id="六、备份配置好的系统镜像"><a href="#六、备份配置好的系统镜像" class="headerlink" title="六、备份配置好的系统镜像"></a>六、备份配置好的系统镜像</h1><p>可以使用树莓派自带的 SD Card Copier对系统进行备份。</p>
 
       
 
@@ -290,6 +224,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">-Python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -340,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://daftpumpkin.github.io/2021/04/29/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://daftpumpkin.github.io/2021/05/02/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -354,15 +299,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/04/29/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/05/03/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          在Android上运行VScode
+          picamera的相关接口
         
       </div>
     </a>
   
+  
+    <a href="/2021/05/01/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">在Android上运行VScode</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -379,19 +329,6 @@
             </div>
         </div>
         
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81TCP-IP%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%9A%84%E8%AE%A4%E7%9F%A5%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">一、TCP&#x2F;IP协议体系的认知：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%EF%BC%88%E4%BB%8E%E5%BA%95%E5%B1%82%E5%BE%80%E9%AB%98%E5%B1%82-%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">二、数据链路层（从底层往高层 ）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BB%A5%E5%A4%AA%E7%BD%91%E5%B8%A7%E7%9A%84%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">1.以太网帧的格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%9C%80%E5%A4%A7%E4%BC%A0%E8%BE%93%E5%8D%95%E5%85%83%EF%BC%88MTU%EF%BC%89%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">2.最大传输单元（MTU）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ARP-RARP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">2.3.</span> <span class="toc-text">3.ARP&#x2F;RARP协议：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ARP"><span class="toc-number">2.3.1.</span> <span class="toc-text">ARP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RARP"><span class="toc-number">2.3.2.</span> <span class="toc-text">RARP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-number">3.</span> <span class="toc-text">三、网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-IP%E9%A6%96%E9%83%A8%E6%A0%BC%E5%BC%8F%EF%BC%9A"><span class="toc-number">3.1.</span> <span class="toc-text">1.IP首部格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-IP%E5%88%86%E7%89%87%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">2.IP分片：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%89%87%E6%83%85%E5%86%B5"><span class="toc-number">3.2.1.</span> <span class="toc-text">分片情况</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8DIP%E5%88%86%E7%89%87"><span class="toc-number">3.2.2.</span> <span class="toc-text">如何避免IP分片</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E5%88%86%E7%89%87%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.2.3.</span> <span class="toc-text">如何确定分片顺序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E7%AB%AF%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E6%89%80%E6%9C%89%E5%88%86%E7%89%87%E9%83%BD%E5%88%B0%E8%BE%BE"><span class="toc-number">3.2.4.</span> <span class="toc-text">接收端如何确定所有分片都到达</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E9%80%89%E8%B7%AF"><span class="toc-number">3.2.5.</span> <span class="toc-text">IP选路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%A1%A8%E7%9A%84%E5%90%AB%E4%B9%89"><span class="toc-number">3.2.6.</span> <span class="toc-text">路由表的含义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ICMP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">3.ICMP协议：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ICMP%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">3.3.1.</span> <span class="toc-text">ICMP报文格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ICMP%E6%8A%A5%E6%96%87%E5%88%86%E4%B8%A4%E7%B1%BB%EF%BC%9A%E6%9F%A5%E8%AF%A2-2%E7%A7%8D-%E6%9F%A5%E9%94%99-5%E7%A7%8D"><span class="toc-number">3.3.2.</span> <span class="toc-text">ICMP报文分两类：查询(2种)+查错(5种)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E4%BC%A0%E8%BE%93%E5%B1%82"><span class="toc-number">4.</span> <span class="toc-text">四、传输层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-UDP%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">4.1.</span> <span class="toc-text">1.UDP协议的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-TCP%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.2.</span> <span class="toc-text">2.TCP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-TCP%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%8E%A7%E5%88%B6%EF%BC%9A"><span class="toc-number">4.3.</span> <span class="toc-text">3.TCP的连接控制：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">4.3.1.</span> <span class="toc-text">三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">4.3.2.</span> <span class="toc-text">四次挥手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="toc-number">4.4.</span> <span class="toc-text">4.TCP流量控制机制：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%B6%85%E6%97%B6%E9%87%8D%E4%BC%A0%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="toc-number">4.5.</span> <span class="toc-text">5.超时重传机制：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%9D%A2%E8%AF%95%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">4.6.</span> <span class="toc-text">6.面试中常见的问题：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%813%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C4%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">4.6.1.</span> <span class="toc-text">1.为什么需要3次握手，4次挥手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%BA%E4%BB%80%E4%B9%88TCP-UDP%E9%83%BD%E5%AD%98%E5%9C%A8%E4%BC%AA%E5%8C%85%E5%A4%B4"><span class="toc-number">4.6.2.</span> <span class="toc-text">2.为什么TCP&#x2F;UDP都存在伪包头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-TCP%E4%B8%8EUDP%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">4.6.3.</span> <span class="toc-text">3.TCP与UDP的对比</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-number">5.</span> <span class="toc-text">五、应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-DNS%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">1.DNS：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-FTP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">5.2.</span> <span class="toc-text">2.FTP协议：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-HTTP%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">5.3.</span> <span class="toc-text">3.HTTP协议：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-HTTPS%E5%8D%8F%E8%AE%AE%EF%BC%9A"><span class="toc-number">5.4.</span> <span class="toc-text">4.HTTPS协议：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E9%9D%A2%E8%AF%95%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">六、面试常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">6.1.</span> <span class="toc-text">分层的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82"><span class="toc-number">6.2.</span> <span class="toc-text">数据链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ARP%E5%8D%8F%E8%AE%AE"><span class="toc-number">6.2.1.</span> <span class="toc-text">ARP协议</span></a></li></ol></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
         
     </div>
 </aside>
@@ -505,6 +442,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">-折腾记录</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-C++</a>
               </li>
             
@@ -568,7 +513,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;请多多指教</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;技术永无止境&lt;br&gt;请多指教&lt;br&gt;&lt;br&gt;正由于我抱着与你相见的希望，我才永远认为最崎岖的路是最好的路。</div>
   	  	
     	</section>
     

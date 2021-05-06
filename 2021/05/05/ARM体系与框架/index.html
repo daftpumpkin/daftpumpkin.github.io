@@ -6,20 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://daftpumpkin.github.io">
-  <title>在Android上运行VScode | Kevin&#39;s Blog</title>
+  <title>梳理ARM体系与框架 | Kevin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在Android上运行VScodetermux-ubuntu项目地址：https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu code-server项目地址：https:&#x2F;&#x2F;github.com&#x2F;cdr&#x2F;code-server 1.下载安装termux因为网络问题install失败，可以在这个网址直接下载完整的安装包：https:&#x2F;&#x2F;f-droid.org&#x2F;package">
+  <meta name="description" content="梳理一些ARM体系与框架中比较重要的概念  硬件基础NOR FLASH  和  NAND FLASH共性1.都是非易失存储介质。即掉电都不会丢失内容。 2.在写入前都需要擦除，因为写操作只能使1-&gt;0，而擦除动作是为了把所有位都变1。 3.擦除单元都以块为单位。实际上NOR Flash的一个bit可以从1变成0，而要从0变1就要擦除整块。NAND flash都需要擦除。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Android上运行VScode">
-<meta property="og:url" content="https://daftpumpkin.github.io/2021/04/29/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/index.html">
+<meta property="og:title" content="梳理ARM体系与框架">
+<meta property="og:url" content="https://daftpumpkin.github.io/2021/05/05/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/index.html">
 <meta property="og:site_name" content="Kevin&#39;s Blog">
-<meta property="og:description" content="在Android上运行VScodetermux-ubuntu项目地址：https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu code-server项目地址：https:&#x2F;&#x2F;github.com&#x2F;cdr&#x2F;code-server 1.下载安装termux因为网络问题install失败，可以在这个网址直接下载完整的安装包：https:&#x2F;&#x2F;f-droid.org&#x2F;package">
+<meta property="og:description" content="梳理一些ARM体系与框架中比较重要的概念  硬件基础NOR FLASH  和  NAND FLASH共性1.都是非易失存储介质。即掉电都不会丢失内容。 2.在写入前都需要擦除，因为写操作只能使1-&gt;0，而擦除动作是为了把所有位都变1。 3.擦除单元都以块为单位。实际上NOR Flash的一个bit可以从1变成0，而要从0变1就要擦除整块。NAND flash都需要擦除。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-29T13:33:43.526Z">
-<meta property="article:modified_time" content="2021-04-29T15:46:48.327Z">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image1.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image2.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image3.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image4.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image5.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image6.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image7.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image8.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image9.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image10.png">
+<meta property="og:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image11.png">
+<meta property="article:published_time" content="2021-05-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-06T15:23:33.263Z">
 <meta property="article:author" content="DaftPumpkin">
-<meta property="article:tag" content="技术记录">
+<meta property="article:tag" content="-嵌入式">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://daftpumpkin.github.io/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image.png">
   
     <link rel="alternative" href="/atom.xml" title="Kevin&#39;s Blog" type="application/atom+xml">
   
@@ -162,43 +175,228 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-在Android上运行VScode" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ARM体系与框架" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      在Android上运行VScode
+      梳理ARM体系与框架
     </h1>
   
 
         
-        <a href="/2021/04/29/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/" class="archive-article-date">
-  	<time datetime="2021-04-29T13:33:43.526Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-29</time>
+        <a href="/2021/05/05/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/" class="archive-article-date">
+  	<time datetime="2021-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="在Android上运行VScode"><a href="#在Android上运行VScode" class="headerlink" title="在Android上运行VScode"></a>在Android上运行VScode</h1><p>termux-ubuntu项目地址：<a target="_blank" rel="noopener" href="https://github.com/Neo-Oli/termux-ubuntu">https://github.com/Neo-Oli/termux-ubuntu</a></p>
-<p>code-server项目地址：<a target="_blank" rel="noopener" href="https://github.com/cdr/code-server">https://github.com/cdr/code-server</a></p>
-<h2 id="1-下载安装termux"><a href="#1-下载安装termux" class="headerlink" title="1.下载安装termux"></a>1.下载安装termux</h2><p>因为网络问题install失败，可以在这个网址直接下载完整的安装包：<br><a target="_blank" rel="noopener" href="https://f-droid.org/packages/com.termux/">https://f-droid.org/packages/com.termux/</a></p>
+        <p><strong>梳理一些ARM体系与框架中比较重要的概念</strong></p>
+<hr>
+<h1 id="硬件基础"><a href="#硬件基础" class="headerlink" title="硬件基础"></a>硬件基础</h1><h2 id="NOR-FLASH-和-NAND-FLASH"><a href="#NOR-FLASH-和-NAND-FLASH" class="headerlink" title="NOR FLASH  和  NAND FLASH"></a>NOR FLASH  和  NAND FLASH</h2><h3 id="共性"><a href="#共性" class="headerlink" title="共性"></a>共性</h3><p>1.都是非易失存储介质。即掉电都不会丢失内容。</p>
+<p>2.在写入前都需要擦除，因为写操作只能使1-&gt;0，而擦除动作是为了把所有位都变1。</p>
+<p>3.擦除单元都以块为单位。实际上NOR Flash的一个bit可以从1变成0，而要从0变1就要擦除整块。NAND flash都需要擦除。</p>
 <span id="more"></span>
 
-<h2 id="2-安装ubuntu"><a href="#2-安装ubuntu" class="headerlink" title="2.安装ubuntu"></a>2.安装ubuntu</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pkg update</span><br><span class="line">pkg install wget proot</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在想要安装的目录下：</span><br><span class="line">mkdir -p -&#x2F;jails&#x2F;ubuntu</span><br><span class="line">cd ~&#x2F;jails&#x2F;ubuntu</span><br><span class="line">weget https:&#x2F;&#x2F;github.com&#x2F;Neo-Oli&#x2F;termux-ubuntu&#x2F;master.ubuntu.sh</span><br><span class="line">bash ubuntu.sh</span><br></pre></td></tr></table></figure>
-<p>此脚本中下载ubuntu包的地址已经过期，但是配置操作可以继续执行，在bash前需要先手动下载ubuntu包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget &quot;https:&#x2F;&#x2F;partner-images.canonical.com&#x2F;core&#x2F;focal&#x2F;current&#x2F;ubuntu-focal-core-cloudimg-arm64-root.tar.gz&quot; -O ubuntu.tar.gz</span><br></pre></td></tr></table></figure>
 
-<p>运行脚本后，使用<code>./start-ubuntu.sh</code>即可开启root的ubuntu系统</p>
-<h2 id="3-配置ubuntu"><a href="#3-配置ubuntu" class="headerlink" title="3.配置ubuntu"></a>3.配置ubuntu</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt upgrade</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-安装code-server"><a href="#4-安装code-server" class="headerlink" title="4.安装code-server"></a>4.安装code-server</h2><p>在code-server的GitHub的Realease中可以找到最新版arm-64bit的地址，直接使用<code>weget</code>指令下载code-server</p>
-<p>解压，运行code-server：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf</span><br><span class="line"></span><br><span class="line">.&#x2F;code-server --auth none</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-开启VSCode"><a href="#5-开启VSCode" class="headerlink" title="5..开启VSCode"></a>5..开启VSCode</h2><p>本地服务器开启以后即可在浏览器的<code>http://localhost:8080</code>中打开vscode</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>NOR</th>
+<th>NAND</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读</td>
+<td>快，像访问SRAM一样，可以随机访问任意地址的数据；如：unsighed short pwAddr = (unsighed short )0x02;unisignded short wVal;wVal = *pwAddr</td>
+<td>快，有严格的时序要求，需要通过一个函数才能读取数据，先发送读命令-&gt;发送地址-&gt;判断nandflash是否就绪-&gt;读取一页数据读命令、发送地址、判断状态、读数据都是通过操作寄存器实现的,如数据寄存器NFDATA</td>
+</tr>
+<tr>
+<td>写</td>
+<td>慢，写之前需要擦除，因为写只能是1-&gt;0,擦除可以使0-&gt;1</td>
+<td>快，写之前需要擦除，因为写只能是1-&gt;0,擦除可以使0-&gt;1</td>
+</tr>
+<tr>
+<td>擦除</td>
+<td>非常慢（5S）</td>
+<td>快（3ms）</td>
+</tr>
+<tr>
+<td>XIP</td>
+<td>代码可以直接在NOR FLASH上运行</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>可靠性</td>
+<td>比较高，位反转的比例小于NAND FLASH的10%</td>
+<td>比较低，位反转比较常见，必须有校验措施</td>
+</tr>
+<tr>
+<td>接口</td>
+<td>与RAM接口相同，地址和数据总线分开</td>
+<td>I/O接口</td>
+</tr>
+<tr>
+<td>可擦除次数</td>
+<td>10000~100000</td>
+<td>100000~1000000</td>
+</tr>
+<tr>
+<td>容量</td>
+<td>小，1MB~32MB</td>
+<td>大，16MB~512MB</td>
+</tr>
+<tr>
+<td>价格</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>主要用途</td>
+<td>常用于保存代码和关键数据</td>
+<td>用于保存数据</td>
+</tr>
+</tbody></table>
+<p><strong>注意：</strong>nandflash和norflash的0地址是不冲突的，norflash占用BANK地址，而nandflash不占用BANK地址，它的0地址是内部的。</p>
+<h2 id="CPU-MPU-MCU-SOC-SOPC联系与区别"><a href="#CPU-MPU-MCU-SOC-SOPC联系与区别" class="headerlink" title="CPU MPU MCU SOC SOPC联系与区别"></a>CPU MPU MCU SOC SOPC联系与区别</h2><h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><p>CPU（Central Processing Unit）,是一台计算机的运算核心和控制核心。CPU由运算器、控制器和寄存器及实现它们之间联系的数据、控制及状态的总线构成。差不多所有的CPU的运作原理可分为四个阶段：提取（Fetch）、解码（Decode）、执行（Execute）和写回（Writeback）。 CPU从存储器或高速缓冲存储器中取出指令，放入指令寄存器，并对指令译码，并执行指令。所谓的计算机的可编程性主要是指对CPU的编程。</p>
+<h3 id="MPU"><a href="#MPU" class="headerlink" title="MPU"></a>MPU</h3><p>MPU (Micro Processor Unit)，叫微处理器（不是微控制器），通常代表一个功能强大的CPU（暂且理解为增强版的CPU吧）,但不是为任何已有的特定计算目的而设计的芯片。这种芯片往往是个人计算机和高端工作站的核心CPU。最常见的微处理器是Motorola的68K系列和Intel的X86系列。</p>
+<h3 id="MCU"><a href="#MCU" class="headerlink" title="MCU"></a>MCU</h3><p>MCU(Micro Control Unit)，叫微控制器，是指随着大规模集成电路的出现及其发展，将计算机的CPU、RAM、ROM、定时计数器和多种I/O接口集成在一片芯片上，形成芯片级的芯片，比如51，avr这些芯片，内部除了CPU外还有RAM,ROM,可以直接加简单的外围器件（电阻，电容）就可以运行代码了，而MPU如x86，arm这些就不能直接放代码了，它只不过是增强版的CPU，所以得添加RAM,ROM。</p>
+<p>MCU MPU 最主要的区别就睡能否直接运行代码。MCU有内部的RAM ROM，而MPU是增强版的CPU，需要添加外部RAM ROM才可以运行代码。</p>
+<h3 id="SOC"><a href="#SOC" class="headerlink" title="SOC"></a>SOC</h3><p>SOC（System on Chip），指的是片上系统，MCU只是芯片级的芯片，而SOC是系统级的芯片，它既MCU（51，avr）那样有内置RAM,ROM同时又像MPU（arm）那样强大的，不单单是放简单的代码，可以放系统级的代码，也就是说可以运行操作系统（将就认为是MCU集成化与MPU强处理力各优点二合一）。</p>
+<h3 id="SOPC"><a href="#SOPC" class="headerlink" title="SOPC"></a>SOPC</h3><p>SOPC（System On a Programmable Chip）可编程片上系统（FPGA就是其中一种），上面4点的硬件配置是固化的，就是说51单片机就是51单片机，不能变为avr，而avr就是avr不是51单片机，他们的硬件是一次性掩膜成型的，能改的就是软件配置，说白点就是改代码，本来是跑流水灯的，改下代码，变成数码管，而SOPC则是硬件配置，软件配置都可以修改，软件配置跟上面一样，没什么好说的，至于硬件，是可以自己构建的也就是说这个芯片是自己构造出来的，这颗芯片我们叫“白片”，什么芯片都不是，把硬件配置信息下载进去了，他就是相应的芯片了，可以让他变成51，也可以是avr，甚至arm，同时SOPC是在SOC基础上来的，所以他也是系统级的芯片，所以记得当把他变成arm时还得加外围ROM，RAM之类的，不然就是MPU了。</p>
+<h2 id="交叉编译"><a href="#交叉编译" class="headerlink" title="交叉编译"></a>交叉编译</h2><h3 id="什么是交叉编译"><a href="#什么是交叉编译" class="headerlink" title="什么是交叉编译"></a>什么是交叉编译</h3><p>在一种计算机环境中运行的编译程序，能编译出在另外一种环境下运行的代码，我们就称这种编译器支持交叉编译。这个编译过程就叫交叉编译。简单地说，就是在一个平台上生成另一个平台上的可执行代码。</p>
+<p>这里需要注意的是所谓平台，实际上包含两个概念：体系结构（Architecture）、操作系统（OperatingSystem）。同一个体系结构可以运行不同的操作系统；同样，同一个操作系统也可以在不同的体系结构上运行。举例来说，我们常说的x86 Linux平台实际上是Intel x86体系结构和Linux for x86操作系统的统称；而x86 WinNT平台实际上是Intel x86体系结构和Windows NT for x86操作系统的简称。</p>
+<h3 id="为什么需要交叉编译："><a href="#为什么需要交叉编译：" class="headerlink" title="为什么需要交叉编译："></a>为什么需要交叉编译：</h3><p>有时是因为目的平台上不允许或不能够安装我们所需要的编译器，而我们又需要这个编译器的某些特征；有时是因为目的平台上的资源贫乏，无法运行我们所需要编译器；有时又是因为目的平台还没有建立，连操作系统都没有，根本谈不上运行什么编译器。</p>
+<p>嵌入式开发通常分为五个步骤：编辑、编译、汇编、链接、调试和下载。每个环节都需要相应的软件实<br>现，如果将这些软件集成在一起，就叫集成开发环境（Integrated Development Environment，IDE）<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image.png" alt="4ed444a1927d45a47587afeff865b707.png"></p>
+<h2 id="基于ROM和RAM的运行方式"><a href="#基于ROM和RAM的运行方式" class="headerlink" title="基于ROM和RAM的运行方式"></a>基于ROM和RAM的运行方式</h2><h3 id="基于RAM"><a href="#基于RAM" class="headerlink" title="基于RAM"></a>基于RAM</h3><p>1.需要把硬盘和其他介质的代码先加载到ram中，加载过程中一般有重定位的操作。</p>
+<p>2.速度比基于ROM的快，可用RAM比基于ROM的少，因为所有的代码，数据都必须存放在RAM中。</p>
+<h3 id="基于ROM"><a href="#基于ROM" class="headerlink" title="基于ROM"></a>基于ROM</h3><p>1.速度较基于RAM的慢，因为会有一个把变量，部分代码等从存储器（硬盘，flash）搬移到RAM的过程。</p>
+<p>2.可用RAM资源比基于RAM的多；</p>
+<h1 id="ARM处理器"><a href="#ARM处理器" class="headerlink" title="ARM处理器"></a>ARM处理器</h1><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="哈佛结构"><a href="#哈佛结构" class="headerlink" title="哈佛结构"></a>哈佛结构</h3><p>哈佛结构釆用指令和数据独立编址，使用两条独立的总线传输，CPU读取指令和数据的操作可以重叠。</p>
+<p>哈佛结构主要用于嵌入式计算机，程序固化在硬件中，有较高的可靠性、运算速度和较大的吞吐。</p>
+<h3 id="冯诺依曼结构"><a href="#冯诺依曼结构" class="headerlink" title="冯诺依曼结构"></a>冯诺依曼结构</h3><p>冯诺依曼结构釆用指令和数据统一编址，使用同条总线传输，CPU读取指令和数据的操作无法重叠。</p>
+<p>冯诺依曼结构主要用于通用计算机领域，需要对存储器中的代码和数据频繁的进行修改，统一编址有利于节约资源。</p>
+<h2 id="ARM流水线技术"><a href="#ARM流水线技术" class="headerlink" title="ARM流水线技术"></a>ARM流水线技术</h2><p>流水线技术通 过多个功能部件并行工作来缩短程序执行时间，提高处理器核的效率和吞吐率，从而成为微处理器设计中最为重要的技术之一。ARM7处理器核使用了典型三级流水线的冯·诺伊曼结构，ARM9系列则采用了基于五级流水线的哈佛结构。通过增加流水线级数简化了流水线各级的逻辑，进一步提高了处理器的性能。</p>
+<p>PC代表程序计数器，流水线使用三个阶段，因此指令分为三个阶段执行：1.取指（从存储器装载一条指令）；2.译码（识别将要被执行的指令）；3.执行（处理指令并将结果写回寄存器）。而R15（PC）总是指向“正在取指”的指令，而不是指向“正在执行”的指令或正在“译码”的指令。一般来说，人们习惯性约定将“正在执行的指令作为参考点”，称之为当前第一条指令，因此PC总是指向第三条指令。当ARM状态时，每条指令为4字节长，所以PC始终指向该指令地址加8字节的地址，即：PC值=当前程序执行位置+8；</p>
+<p>ARM指令是三级流水线，取指，译指，执行，同时执行的，现在PC指向的是正在取指的地址（下一条指令），那么cpu正在译指的指令地址是PC-4（假设在ARM状态下，一个指令占4个字节），cpu正在执行的指令地址是PC-8，也就是说PC所指向的地址和现在所执行的指令地址相差8。</p>
+<p>当突然发生中断的时候，保存的是PC的地址（PC-8+4 = PC-4 下一条指令的地址）这样你就知道了，如果返回的时候返回PC，那么中间就有一个指令没有执行，所以用SUB pc lr-irq #4。<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image1.png" alt="e7d8eb6acfeefbc187ef718a00ce750b.png"></p>
+<h2 id="ARM的工作模式"><a href="#ARM的工作模式" class="headerlink" title="ARM的工作模式"></a>ARM的工作模式</h2><h3 id="用户模式（USR）"><a href="#用户模式（USR）" class="headerlink" title="用户模式（USR）"></a>用户模式（USR）</h3><p>用户模式是用户程序的工作模式，它运行在操作系统的用户态，它没有权限去操作其它硬件资源，只能执行处理自己的数据，也不能切换到其它模式下，要想访问硬件资源或切换到其它模式只能通过软中断或产生异常。</p>
+<h3 id="系统模式（SYS）"><a href="#系统模式（SYS）" class="headerlink" title="系统模式（SYS）"></a>系统模式（SYS）</h3><p>系统模式是特权模式，不受用户模式的限制。用户模式和系统模式共用一套寄存器，操作系统在该模式下可以方便的访问用户模式的寄存器，而且操作系统的一些特权任务可以使用这个模式访问一些受控的资源。</p>
+<p>说明：用户模式与系统模式两者使用相同的寄存器，都没有SPSR（Saved Program Statement Register，已保存程序状态寄存器），但系统模式比用户模式有更高的权限，可以访问所有系统资源。</p>
+<h3 id="一般中断模式（IRQ）"><a href="#一般中断模式（IRQ）" class="headerlink" title="一般中断模式（IRQ）"></a>一般中断模式（IRQ）</h3><p>一般中断模式也叫普通中断模式，用于处理一般的请求中断，通常在阴间产生中断信号之后自动进入该模式，该模式为特权模式，可以自由访问系统硬件资源。</p>
+<h3 id="快速中断模式（FIQ）"><a href="#快速中断模式（FIQ）" class="headerlink" title="快速中断模式（FIQ）"></a>快速中断模式（FIQ）</h3><p>快速中断模式是相对一般中断模式而言的，它是用来处理对时间要求比较紧急的中断请求，主要用于高速数据传输及通道处理中。（快中断有许多（R8~R14）自己的专用寄存器，发生中断时，使用自己的寄存器就避免了保存和恢复某些寄存器。如果异常中断处理程序中使用它自己的物理寄存器之外的其他寄存器，异常中断处理程序必须保存和恢复这些寄存器）</p>
+<h3 id="管理模式（SVC）"><a href="#管理模式（SVC）" class="headerlink" title="管理模式（SVC）"></a>管理模式（SVC）</h3><p>管理模式是CPU上电后默认模式，因此，在该模式下主要用来做系统的初始化，软中断处理也在该模式下。当用户模式下的用户程序请求使用硬件资源时，通过软件中断进入该模式。</p>
+<p>说明：系统复位或开机、软中断时进入到SVC模式下。</p>
+<h3 id="终止模式（ABT）"><a href="#终止模式（ABT）" class="headerlink" title="终止模式（ABT）"></a>终止模式（ABT）</h3><p>中止模式用于支持虚拟内存或存储器保护，当用户程序访问非法地址，没有权限读取的内存地址时，会进入该模式，linux下编程时经常出现的segment fault通常都是在该模式下抛出返回的。</p>
+<h3 id="未定义模式（UND）"><a href="#未定义模式（UND）" class="headerlink" title="未定义模式（UND）"></a>未定义模式（UND）</h3><p>未定义模式用于支持硬件协处理器的软件仿真，CPU在指令的译码阶段不能识别该指令操作时，会进入未定义模式。</p>
+<p>1.除了用户模式外，其它6种模式称为特权模式。所谓特权模式，即具有如下权利：</p>
+<p>a. MRS（把状态寄存器的内容放到通用寄存器）</p>
+<p>b. MSR（把通用寄存器的内容放到状态寄存器中）</p>
+<p>由于状态寄存器中的内容不能够改变，因此，要先把内容复制到通用寄存器中，然后修改通用寄存器中的内容，再把通用寄存器中的内容复制给状态寄存器中，即可完成“修改状态寄存器”的任务。</p>
+<p>2.剩下的六种模式中除去系统模式外，统称为异常模式。</p>
+<h2 id="ARM寄存器"><a href="#ARM寄存器" class="headerlink" title="ARM寄存器"></a>ARM寄存器</h2><p>ARM处理器共有37个寄存器。它包含31个通用寄存器和6个状态寄存器。</p>
+<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><p>通用寄存器包括R0-R15，可以分为3类：</p>
+<p>1.未分组寄存器R0-R7</p>
+<p>在所有运行模式下，未分组寄存器都指向同一个物理寄存器，他们未被系统用作特殊的用途。因此在中断或异常处理进行异常模式转换时，由于不同的处理器运行模式均使用相同的物理寄存器，所以可能造成寄存器中数据的破坏。</p>
+<p>2.分组寄存器R8-R14</p>
+<p>对于分组寄存器，他们每次所访问的物理寄存器都与当前的处理器运行模式相关。</p>
+<p>R13常用作存放堆栈指针，用户也可以使用其他寄存器存放堆栈指针，但在Thumb指令集下，某些指令强制要求使用R13存放堆栈指针。</p>
+<p>R14称为链接寄存器（LR，Link Register），当执行子程序时，R14可得到R15（PC）的备份，执行完子程序后，又将R14的值复制回PC，即使用R14保存返回地址。</p>
+<p>3.程序计数器PC（R15）</p>
+<p>寄存器R15用作程序计数器（PC），在ARM状态下，位[1:0]为0，位[31:2]用于保存PC；在Thumb状态下,位[0]为0，位[31:1]用于保存PC。</p>
+<h2 id="ARM的指令集"><a href="#ARM的指令集" class="headerlink" title="ARM的指令集"></a>ARM的指令集</h2><p>分为2类，分别为Thumb指令集，ARM指令集。ARM指令长度为32位，Thumb指令长度为16位。这种特点使得ARM既能执行16位指令，又能执行32位指令，从而增强了ARM内核的功能。</p>
+<h2 id="ARM处理器的工作状态"><a href="#ARM处理器的工作状态" class="headerlink" title="ARM处理器的工作状态"></a>ARM处理器的工作状态</h2><p>从编程的角度来看，ARM微处理器的工作状态一般<strong>ARM</strong>和<strong>Thumb</strong>有两种，并可在两种状态之间切换。</p>
+<p>ARM状态：此时处理器执行32位的字对齐ARM指令，绝大部分工作在此状态。</p>
+<p>Thumb状态：此时处理器执行16位的半字对齐的Thumb指令。</p>
+<h2 id="ARM系统中函数调用的参数传递"><a href="#ARM系统中函数调用的参数传递" class="headerlink" title="ARM系统中函数调用的参数传递"></a>ARM系统中函数调用的参数传递</h2><p>当参数小于等于4的时候是通过r0-r3寄存器来进行传递的，当参数大于4的时候是通过压栈的方式进行传递。</p>
+<h2 id="ARM协处理器指令"><a href="#ARM协处理器指令" class="headerlink" title="ARM协处理器指令"></a>ARM协处理器指令</h2><p>ARM协处理器指令包括以下3类：<br>1.用于ARM处理器初始化ARM协处理器的数据处理操作。</p>
+<p>2.用于ARM处理器的寄存器和ARM协处理器的寄存器间的数据传送操作。</p>
+<p>3.用于在ARM协处理器的寄存器和内存单元之间传送数据。</p>
+<h2 id="PLL"><a href="#PLL" class="headerlink" title="PLL"></a>PLL</h2><p>PLL(Phase Locked Loop)： 为锁相回路或锁相环，用来统一整合时钟信号，使高频器件正常工作，如内存的存取资料等。PLL用于振荡器中的反馈技术。 许多电子设备要正常工作，通常需要外部的输入信号与内部的振荡信号同步。一般的晶振由于工艺与成本原因，做不到很高的频率，而在需要高频应用时，由相应的器件VCO，实现转成高频，但并不稳定，故利用锁相环路就可以实现稳定且高频的时钟信号。</p>
+<p>简单来说，输入时钟的存在是作为“参考源”。锁相环不是为了单纯产生同频同相信号，而是一般集成进某种“频率综合电路”，产生一个不同频，但锁相的信号。有点绕，打个比方：某参考晶振10Mhz，频率综合器A使用该参考源产生了900Mhz时钟，而频率综合器B产生了1Ghz时钟。虽然两路频率不同，但由于使用的通一个参考源，他们俩仍然是同源信号。相反，如果不同源，那么即便同频他们也不可能一致，因为世界上没有两个钟能做到完全一样，总有微弱的频差，导致相位飘移。在很多现实应用中有要求同源时钟的场合，所以，锁相环被广泛应用。锁相环的另外一项衍生应用是相干解调，可以自己查查相关资料。</p>
+<h1 id="中断与异常"><a href="#中断与异常" class="headerlink" title="中断与异常"></a>中断与异常</h1><h2 id="中断与异常的区别"><a href="#中断与异常的区别" class="headerlink" title="中断与异常的区别"></a>中断与异常的区别</h2><p>中断是指外部硬件产生的一个电信号从CPU的中断引脚进入，打断CPU的运行。异常是指软件运行过程中发生了一些必须作出处理的事件，CPU自动产生一个陷入来打断CPU的运行。异常在处理的时候必须考虑与处理器的时钟同步，实际上异常也称为同步中断，在处理器执行到因编译错误而导致的错误指令时，或者在执行期间出现特殊错误，必须靠内核处理的时候，处理器就会产生一个异常。</p>
+<h2 id="中断与DMA"><a href="#中断与DMA" class="headerlink" title="中断与DMA"></a>中断与DMA</h2><p><strong>DMA</strong>：是一种无须CPU的参与，就可以让外设与系统内存之间进行双向数据传输的硬件机制，使用DMA可以使系统CPU从实际的I/O数据传输过程中摆脱出来，从而大大提高系统的吞吐率。</p>
+<p><strong>中断</strong>：是指CPU在执行程序的过程中，出现了某些突发事件时，CPU必须暂停执行当前的程序，转去处理突发事件，处理完毕后CPU又返回源程序被中断的位置并继续执行。</p>
+<p><strong>所以中断和DMA的区别就是：DMA不需CPU参与，而中断是需要CPU参与的。</strong></p>
+<h2 id="中断为何不能睡眠"><a href="#中断为何不能睡眠" class="headerlink" title="中断为何不能睡眠"></a>中断为何不能睡眠</h2><p>1.中断处理的时候,不应该发生进程切换。因为在中断上下文中，唯一能打断当前中断handler的只有更高优先级的中断，它不会被进程打断。如果在中断上下文中休眠，则没有办法唤醒它，因为所有的wake_up_xxx都是针对某个进程而言的，而在中断上下文中，没有进程的概念，没有一个task_struct（这点对于softirq和tasklet一样）。因此真的休眠了，比如调用了会导致阻塞的例程，内核几乎肯定会死。</p>
+<p>2.schedule()在切换进程时，保存当前的进程上下文（CPU寄存器的值、进程的状态以及堆栈中的内容），以便以后恢复此进程运行。中断发生后，内核会先保存当前被中断的进程上下文（在调用中断处理程序后恢复）。</p>
+<p>但在中断处理程序里，CPU寄存器的值肯定已经变化了（最重要的程序计数器PC、堆栈SP等）。如果此时因为睡眠或阻塞操作调用了schedule()，则保存的进程上下文就不是当前的进程上下文了。所以，不可以在中断处理程序中调用schedule()。</p>
+<ol start="3">
+<li> 2.4内核中schedule()函数本身在进来的时候判断是否处于中断上下文:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(unlikely(in_interrupt()))</span><br><span class="line">BUG();</span><br></pre></td></tr></table></figure>
+因此，强行调用schedule()的结果就是内核BUG，但看2.6.18的内核schedule()的实现却没有这句，改掉了。</li>
+</ol>
+<p>4.中断handler会使用被中断的进程内核堆栈，但不会对它有任何影响，因为handler使用完后会完全清除它使用的那部分堆栈，恢复被中断前的原貌。</p>
+<p>5.处于中断上下文时候，内核是不可抢占的。因此，如果休眠，则内核一定挂起。</p>
+<h2 id="中断的响应执行流程"><a href="#中断的响应执行流程" class="headerlink" title="中断的响应执行流程"></a>中断的响应执行流程</h2><p>中断的响应流程：<br>cpu接受中断-&gt;保存中断上下文跳转到中断处理历程-&gt;执行中断上半部-&gt;执行中断下半部-&gt;恢复中断上下文。</p>
+<h2 id="异常出现后，ARM微处理器会执行哪几步操作？"><a href="#异常出现后，ARM微处理器会执行哪几步操作？" class="headerlink" title="异常出现后，ARM微处理器会执行哪几步操作？"></a>异常出现后，ARM微处理器会执行哪几步操作？</h2><p>1.将下一条指令的地址存入相应连接寄存器LR，以便程序在处理异常返回时能从正确的位置重新开始执行。若异常是从ARM状态进入，则LR寄存器中保存的是下一条指令的地址（当前PC＋4或PC＋8，与异常的类型有关）；若异常是从Thumb状态进入，则在LR寄存器中保存当前PC的偏移量，这样，异常处理程序就不需要确定异常是从何种状态进入的。例如：在软件中断异常SWI，指令 MOV PC，R14_svc总是返回到下一条指令，不管SWI是在ARM状态执行，还是在Thumb状态执行。</p>
+<p>2.将CPSR复制到相应的SPSR中。</p>
+<p>3.根据异常类型，强制设置CPSR的运行模式位。</p>
+<p>4.强制PC从相关的异常向量地址取下一条指令执行，从而跳转到相应的异常处理程序处。</p>
+<h2 id="中断服务程序需要注意哪些？"><a href="#中断服务程序需要注意哪些？" class="headerlink" title="中断服务程序需要注意哪些？"></a>中断服务程序需要注意哪些？</h2><p>1.注意<strong>快进快出</strong>，在中断服务程序里面尽量快速采集信息，包括硬件信息，然后退出中断，要做其它事情可以使用工作队列或者tasklet方式。也就是中断上半部和下半部。</p>
+<p>2.中断服务程序中不能有<strong>阻塞操作</strong>。应为中断期间是完全占用CPU的（即不存在内核调度），中断被阻塞住，其他进程将无法操作。</p>
+<p>3.中断服务程序<strong>注意返回值</strong>，要用操作系统定义的宏做为返回值，而不是自己定义的。</p>
+<p>4.如果要做的事情较多，应将这些任务放在后半段(tasklet，等待队列等)处理。</p>
+<h1 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h1><h2 id="异步与同步传输"><a href="#异步与同步传输" class="headerlink" title="异步与同步传输"></a>异步与同步传输</h2><p><strong>异步传输</strong>：是一种典型的基于字节的输入输出，数据按每次一个字节进行传输，其传输速度低。</p>
+<p><strong>同步传输</strong>：需要外界的时钟信号进行通信，是把数据字节组合起来一起发送，这种组合称之为帧，其传输速度比异步传输快。</p>
+<h2 id="RS232和RS485通讯接口区别"><a href="#RS232和RS485通讯接口区别" class="headerlink" title="RS232和RS485通讯接口区别"></a>RS232和RS485通讯接口区别</h2><p>1.传输方式不同。 RS232采取不平衡传输方式，即所谓单端通讯。 而RS485则采用平衡传输，即差分传输方式。</p>
+<p>2.传输距离不同。RS232适合本地设备之间的通信，传输距离一般不超过20m。而RS485的传输距离为几十米到上千米。</p>
+<p>3.设备数量。RS232 只允许一对一通信，而RS485 接口在总线上是允许连接多达128个收发器。</p>
+<p>4.连接方式。RS232，规定用电平表示数据，因此线路就是单线路的，用两根线才能达到全双工的目的；而RS485， 使用差分电平表示数据，因此，必须用两根线才能达到传输数据的基本要求，要实现全双工，必需用4根线。</p>
+<p> <strong>总结</strong>：从某种意义上，可以说，线路上存在的仅仅是电流，RS232/RS485规定了这些电流在什么样的线路上流动和流动的样式。</p>
+<h2 id="SPI协议"><a href="#SPI协议" class="headerlink" title="SPI协议"></a>SPI协议</h2><h3 id="SPI的应用"><a href="#SPI的应用" class="headerlink" title="SPI的应用"></a>SPI的应用</h3><p>SPI(Serial Peripheral Interface)协议是由摩托罗拉公司提出的通讯协议，即串行外围设备接口，是一种高速全双工的通信总线。SPI总线系统是一种同步串行外设接口，它可以使MCU与各种外围设备以串行方式进行通信以交换信息。SPI总线可直接与各个厂家生产的多种标准外围器件相连，包括FLASH、RAM、网络控制器、LCD显示驱动器、A/D转换器和MCU等。</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p><strong>MOSI (Master Output， Slave Input)</strong><br>主设备输出/从设备输入引脚。主机的数据从这条信号线输出，从机由这条信号线读入主机发送的数据，即这条线上数据的方向为主机到从机。</p>
+<p><strong>MISO(Master Input,， Slave Output)</strong><br>主设备输入/从设备输出引脚。主机从这条信号线读入数据，从机的数据由这条信号线输出到主机，即在这条线上数据的方向为从机到主机。</p>
+<p><strong>SCLK (Serial Clock)</strong><br>时钟信号线，用于通讯数据同步。它由通讯主机产生，决定了通讯的速率，不同的设备支持的最高时钟频率不一样，如 STM32 的 SPI 时钟频率最大为fpclk/2，两个设备之间通讯时，通讯速率受限于低速设备。</p>
+<p><strong>SS( Slave Select)</strong><br>从设备选择信号线，常称为片选信号线，也称为 NSS、 CS，以下用 NSS 表示。 当有多个 SPI 从设备与 SPI 主机相连时，设备的其它信号线 SCK、MOSI 及 MISO 同时并联到相同的 SPI 总线上，即无论有多少个从设备，都共同只使用这 3 条总线；而每个从设备都有独立的这一条 NSS 信号线，本信号线独占主机的一个引脚，即有多少个从设备，就有多少条片选信号线。</p>
+<p>I2C 协议中通过设备地址来寻址、选中总线上的某个设备并与其进行通讯；而 SPI 协议中没有设备地址，它使用 NSS 信号线来寻址，当主机要选择从设备时，把该从设备的 NSS 信号线设置为低电平，该从设备即被选中，即片选有效，接着主机开始与被选中的从设备进行 SPI 通讯。所以SPI 通讯以 NSS 线置低电平为开始信号，以 NSS 线被拉高作为结束信号。</p>
+<h3 id="协议层"><a href="#协议层" class="headerlink" title="协议层"></a>协议层</h3><p>SPI 通讯设备之间的常用连接方式见下图：</p>
+<p><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image2.png" alt="6c5f6686fd8a402d380f682d850b8f99.png"></p>
+<p>SPI 通讯的通讯时序，见下图：</p>
+<p><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image3.png" alt="59288bd126fe2fb65119652eae32c7a4.png"></p>
+<p><strong>通讯的起始和停止信号</strong></p>
+<p>在图中的标号1处，NSS 信号线由高变低，是 SPI 通讯的起始信号。 NSS 是每个从机各自独占的信号线，当从机检在自己的 NSS 线检测到起始信号后，就知道自己被主机选中了，开始准备与主机通讯。在图中的标号处， NSS 信号由低变高，是 SPI 通讯的停止信号，表示本次通讯结束，从机的选中状态被取消。</p>
+<p><strong>数据有效性</strong></p>
+<p>SPI 使用 MOSI 及 MISO 信号线来传输数据，使用 SCK 信号线进行数据同步。 MOSI及 MISO 数据线在 SCK 的每个时钟周期传输一位数据，且数据输入输出是同时进行的。数据传输时， MSB 先行（高位先行）或 LSB（低位先行）先行并没有作硬性规定，但要保证两个 SPI 通讯设备之间使用同样的协定，一般都会采用上图中的 MSB 先行（高位先行）模式。</p>
+<p>观察图中的2345标号处， MOSI 及 MISO 的数据在 SCK 的上升沿期间变化输出，在 SCK 的下降沿时被采样。即在 SCK 的下降沿时刻， MOSI 及 MISO 的数据有效，高电平时表示数据“1”，为低电平时表示数据“0”。在其它时刻，数据无效， MOSI 及 MISO为下一次表示数据做准备。</p>
+<p>SPI 每次数据传输可以 8 位或 16 位为单位，每次传输的单位数不受限制。</p>
+<p><strong>CPOL（时钟极性）/CPHA（时钟相位）及通讯模式</strong></p>
+<p>上面讲述的图中的时序只是 SPI 中的其中一种通讯模式， SPI 一共有四种通讯模式，它们的主要区别是：总线空闲时 SCK 的时钟状态以及数据采样时刻。为方便说明，在此引入“时钟极性CPOL”和“时钟相位 CPHA”的概念。</p>
+<p>时钟极性 CPOL 是指 SPI 通讯设备处于空闲状态时， SCK 信号线的电平信号(即 SPI 通讯开始前、 NSS 线为高电平时 SCK 的状态)。 CPOL=0 时， SCK 在空闲状态时为低电平，CPOL=1 时，则相反。</p>
+<p>时钟相位 CPHA 是指数据的采样的时刻，当 CPHA=0 时， MOSI 或 MISO 数据线上的信号将会在 SCK 时钟线的“奇数边沿” 被采样。当 CPHA=1 时，数据线在 SCK 的“偶数边沿” 采样。</p>
+<h2 id="IIC协议"><a href="#IIC协议" class="headerlink" title="IIC协议"></a>IIC协议</h2><p>IIC协议是由数据线SDA和时钟SCL构成的串行总线，可发送和接收数据,是一个多主机的<strong>半双工通信方式</strong></p>
+<p>每个挂接在总线上的器件都有个唯一的地址。位速在标准模式下可达 100kbit/s,在快速模式下可达400kbit/s，在高速模式下可待3.4Mbit/s。</p>
+<p>I2C总线系统结构,如下所示:</p>
+<p><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image4.png" alt="91efe0688fd466808c6a6c16b90a76c2.png"></p>
+<h3 id="I2C时序"><a href="#I2C时序" class="headerlink" title="I2C时序"></a>I2C时序</h3><p><strong>1.空闲状态</strong></p>
+<p>当总线上的SDA和SCL两条信号线同时处于高电平,便是空闲状态,如上面的硬件图所示,当我们不传输数据时, SDA和SCL被上拉电阻拉高,即进入空闲状态</p>
+<p><strong>2.起始信号</strong></p>
+<p>当SCL为高期间，SDA由高到低的跳变；便是总线的启动信号,只能由主机发起,且在空闲状态下才能启动该信号,如下图所示：<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image5.png" alt="a6e46e6f9c7e91baebe374254661ed07.png"></p>
+<p><strong>3.停止信号</strong></p>
+<p>当SCL为高期间，SDA由低到高的跳变；便是总线的停止信号,表示数据已传输完成,如下图所示：<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image6.png" alt="e983dbd28ed42e67844d95463110a980.png"></p>
+<p><strong>4.传输数据格式</strong></p>
+<p>当发了起始信号后,就开始传输数据,传输的数据格式如下图所示：</p>
+<p>当SCL为高电平时,便会获取SDA数据值,其中SDA数据必须是稳定的(若SDA不稳定就会变成起始/停止信号)。</p>
+<p>当SCL为低电平时,便是SDA的电平变化状态。</p>
+<p>若主从机在传输数据期间,需要完成其它功能(例如一个中断),可以主动拉低SCL,使I2C进入等待状态,直到处理结束再释放SCL,数据传输会继续</p>
+<p><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image7.png" alt="da48db6e27e29dd305745a33a61fe324.png"></p>
+<p><strong>5.应答信号ACK</strong></p>
+<p>I2C总线上的数据都是以8位数据(字节)进行的，当发送了8个数据后，发送方会在第9个时钟脉冲期间释放SDA数据，当接收方接收该字节成功，便会输出一个ACK应答信号，当SDA为高电平,表示为非应答信号NACK，当SDA为低电平，表示为有效应答信号ACK</p>
+<p>PS:当主机为接收方时,收到最后一个字节后,主机可以不发送ACK,直接发送停止信号来结束传输。</p>
+<p>当从机为接收方时，没有发送ACK，则表示从机可能在忙其它事、或者不匹配地址信号和不支持多主机发送，主机可以发送停止信号，再次发送起始信号启动新的传输。<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image8.png" alt="30c27c95a037187e52bdd81e357b033f.png"></p>
+<p><strong>6.完整的数据传输</strong></p>
+<p>如下图所示, 发送起始信号后,便发送一个8位的设备地址,其中第8位是对设备的读写标志,后面紧跟着的就是数据了,直到发送停止信号终止。</p>
+<p>PS:当我们第一次是读操作，然后想换成写操作时，可以再次发送一个起始信号，然后发送读的设备地址，不需要停止信号便能实现不同的地址转换。<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image9.png" alt="457ac287cc2eb4a3463234cb1fccea32.png"></p>
+<h3 id="I2C传输数据的格式"><a href="#I2C传输数据的格式" class="headerlink" title="I2C传输数据的格式"></a>I2C传输数据的格式</h3><p><strong>1.写操作</strong></p>
+<p>刚开始主芯片要发出一个start信号，然后发出一个(用来确定是往哪一个芯片写数据)，方向(读/写，0表示写，1表示读)。回应(用来确定这个设备是否存在)，然后就可以传输数据，传输数据之后，要有一个回应信号（确定数据是否接受完成)，然后再传输下一个数据。每传输一个数据，接受方都会有一个回应信号，数据发送完之后，主芯片就会发送一个停止信号。</p>
+<p>白色背景：主→从。灰色背景：从→主。<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image10.png" alt="41b864a32b52f310930f5b6ac1b17043.png"></p>
+<p><strong>2.读操作</strong></p>
+<p>刚开始主芯片要发出一个start信号，然后发出一个设备地址(用来确定是从哪一个芯片读取数据)，方向(读/写，0表示写，1表示读)。回应(用来确定这个设备是否存在)，然后就可以传输数据，传输数据之后，要有一个回应信号（确定数据是否接受完成)，然后在传输下一个数据。每传输一个数据，接受方都会有一个回应信号，数据发送完之后，主芯片就会发送一个停止信号。</p>
+<p>白色背景：主→从。灰色背景：从→主<br><img src="/images/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/Image11.png" alt="54f61e63ea94a0e7919c649c6b0458f6.png"></p>
 
       
 
@@ -207,6 +405,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">-嵌入式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -257,7 +466,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://daftpumpkin.github.io/2021/04/29/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://daftpumpkin.github.io/2021/05/05/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +480,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/04/29/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          picamera的相关接口
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/04/29/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">计网复习</div>
+    <a href="/2021/05/04/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">C++学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -301,6 +501,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">硬件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NOR-FLASH-%E5%92%8C-NAND-FLASH"><span class="toc-number">1.1.</span> <span class="toc-text">NOR FLASH  和  NAND FLASH</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text">共性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.2.</span> <span class="toc-text">特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CPU-MPU-MCU-SOC-SOPC%E8%81%94%E7%B3%BB%E4%B8%8E%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">CPU MPU MCU SOC SOPC联系与区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU"><span class="toc-number">1.2.1.</span> <span class="toc-text">CPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MPU"><span class="toc-number">1.2.2.</span> <span class="toc-text">MPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MCU"><span class="toc-number">1.2.3.</span> <span class="toc-text">MCU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SOC"><span class="toc-number">1.2.4.</span> <span class="toc-text">SOC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SOPC"><span class="toc-number">1.2.5.</span> <span class="toc-text">SOPC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91"><span class="toc-number">1.3.</span> <span class="toc-text">交叉编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91"><span class="toc-number">1.3.1.</span> <span class="toc-text">什么是交叉编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%EF%BC%9A"><span class="toc-number">1.3.2.</span> <span class="toc-text">为什么需要交叉编译：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EROM%E5%92%8CRAM%E7%9A%84%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">基于ROM和RAM的运行方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ERAM"><span class="toc-number">1.4.1.</span> <span class="toc-text">基于RAM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EROM"><span class="toc-number">1.4.2.</span> <span class="toc-text">基于ROM</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ARM%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">ARM处理器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%88%E4%BD%9B%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.1.</span> <span class="toc-text">哈佛结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E7%BB%93%E6%9E%84"><span class="toc-number">2.1.2.</span> <span class="toc-text">冯诺依曼结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%8A%80%E6%9C%AF"><span class="toc-number">2.2.</span> <span class="toc-text">ARM流水线技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">ARM的工作模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%EF%BC%88USR%EF%BC%89"><span class="toc-number">2.3.1.</span> <span class="toc-text">用户模式（USR）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F%EF%BC%88SYS%EF%BC%89"><span class="toc-number">2.3.2.</span> <span class="toc-text">系统模式（SYS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E4%B8%AD%E6%96%AD%E6%A8%A1%E5%BC%8F%EF%BC%88IRQ%EF%BC%89"><span class="toc-number">2.3.3.</span> <span class="toc-text">一般中断模式（IRQ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E4%B8%AD%E6%96%AD%E6%A8%A1%E5%BC%8F%EF%BC%88FIQ%EF%BC%89"><span class="toc-number">2.3.4.</span> <span class="toc-text">快速中断模式（FIQ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E6%A8%A1%E5%BC%8F%EF%BC%88SVC%EF%BC%89"><span class="toc-number">2.3.5.</span> <span class="toc-text">管理模式（SVC）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%88%E6%AD%A2%E6%A8%A1%E5%BC%8F%EF%BC%88ABT%EF%BC%89"><span class="toc-number">2.3.6.</span> <span class="toc-text">终止模式（ABT）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%BC%8F%EF%BC%88UND%EF%BC%89"><span class="toc-number">2.3.7.</span> <span class="toc-text">未定义模式（UND）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.4.</span> <span class="toc-text">ARM寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">2.4.1.</span> <span class="toc-text">通用寄存器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E7%9A%84%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-number">2.5.</span> <span class="toc-text">ARM的指令集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E5%A4%84%E7%90%86%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8A%B6%E6%80%81"><span class="toc-number">2.6.</span> <span class="toc-text">ARM处理器的工作状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">2.7.</span> <span class="toc-text">ARM系统中函数调用的参数传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ARM%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">2.8.</span> <span class="toc-text">ARM协处理器指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PLL"><span class="toc-number">2.9.</span> <span class="toc-text">PLL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8"><span class="toc-number">3.</span> <span class="toc-text">中断与异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">3.1.</span> <span class="toc-text">中断与异常的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%8EDMA"><span class="toc-number">3.2.</span> <span class="toc-text">中断与DMA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E7%9D%A1%E7%9C%A0"><span class="toc-number">3.3.</span> <span class="toc-text">中断为何不能睡眠</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E7%9A%84%E5%93%8D%E5%BA%94%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.4.</span> <span class="toc-text">中断的响应执行流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%87%BA%E7%8E%B0%E5%90%8E%EF%BC%8CARM%E5%BE%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%BC%9A%E6%89%A7%E8%A1%8C%E5%93%AA%E5%87%A0%E6%AD%A5%E6%93%8D%E4%BD%9C%EF%BC%9F"><span class="toc-number">3.5.</span> <span class="toc-text">异常出现后，ARM微处理器会执行哪几步操作？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%96%AD%E6%9C%8D%E5%8A%A1%E7%A8%8B%E5%BA%8F%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">3.6.</span> <span class="toc-text">中断服务程序需要注意哪些？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E4%B8%8E%E5%90%8C%E6%AD%A5%E4%BC%A0%E8%BE%93"><span class="toc-number">4.1.</span> <span class="toc-text">异步与同步传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RS232%E5%92%8CRS485%E9%80%9A%E8%AE%AF%E6%8E%A5%E5%8F%A3%E5%8C%BA%E5%88%AB"><span class="toc-number">4.2.</span> <span class="toc-text">RS232和RS485通讯接口区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SPI%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.3.</span> <span class="toc-text">SPI协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SPI%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">4.3.1.</span> <span class="toc-text">SPI的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">4.3.2.</span> <span class="toc-text">接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%B1%82"><span class="toc-number">4.3.3.</span> <span class="toc-text">协议层</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IIC%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.4.</span> <span class="toc-text">IIC协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C%E6%97%B6%E5%BA%8F"><span class="toc-number">4.4.1.</span> <span class="toc-text">I2C时序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I2C%E4%BC%A0%E8%BE%93%E6%95%B0%E6%8D%AE%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.4.2.</span> <span class="toc-text">I2C传输数据的格式</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
@@ -414,6 +627,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">-折腾记录</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">-嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">-C++</a>
               </li>
             
@@ -477,7 +698,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;请多多指教</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;技术永无止境&lt;br&gt;请多指教&lt;br&gt;&lt;br&gt;正由于我抱着与你相见的希望，我才永远认为最崎岖的路是最好的路。</div>
   	  	
     	</section>
     
