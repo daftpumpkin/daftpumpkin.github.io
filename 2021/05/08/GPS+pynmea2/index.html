@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://daftpumpkin.github.io">
-  <title>picamera的相关接口 | Kevin&#39;s Blog</title>
+  <title>GPS + pynmea2 | Kevin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="摄像头的驱动方法1. 硬件连接：把摄像头的排线插入到网口和 HDMI 口之间的排线插槽，银色亮面朝向 HDMI 口。需要先把树莓 派板载的排线插槽的扣子拨开，才能插入排线。排线需要紧密插入排线插槽，同时应注意避免排 线折弯。排线插入之后，需要把插槽的扣子重新扣上。 2. 软件驱动：1.进入Raspbian系统终端，更新系统：     12apt-get update    apt-get upgr">
+  <meta name="description" content="GPS + pynmea2使用pynmea2解析GPS模块  GPS:项目中使用到AT1218-BD模块 NMEA 0183 是一套定义接收机输出的标准协议，有几种不同的格式，每种都是独立的、逗点隔开文本数据。它们包含了可见的卫星、卫星状态、定位状态以及接收机速度等信息。NMEA 0183 实际上已成为所有的 GPS 接收机最通用的数据输出格式，同时它也被用于与 GPS 接收机接口的大多数的软件包">
 <meta property="og:type" content="article">
-<meta property="og:title" content="picamera的相关接口">
-<meta property="og:url" content="https://daftpumpkin.github.io/2021/05/03/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/index.html">
+<meta property="og:title" content="GPS + pynmea2">
+<meta property="og:url" content="https://daftpumpkin.github.io/2021/05/08/GPS+pynmea2/index.html">
 <meta property="og:site_name" content="Kevin&#39;s Blog">
-<meta property="og:description" content="摄像头的驱动方法1. 硬件连接：把摄像头的排线插入到网口和 HDMI 口之间的排线插槽，银色亮面朝向 HDMI 口。需要先把树莓 派板载的排线插槽的扣子拨开，才能插入排线。排线需要紧密插入排线插槽，同时应注意避免排 线折弯。排线插入之后，需要把插槽的扣子重新扣上。 2. 软件驱动：1.进入Raspbian系统终端，更新系统：     12apt-get update    apt-get upgr">
+<meta property="og:description" content="GPS + pynmea2使用pynmea2解析GPS模块  GPS:项目中使用到AT1218-BD模块 NMEA 0183 是一套定义接收机输出的标准协议，有几种不同的格式，每种都是独立的、逗点隔开文本数据。它们包含了可见的卫星、卫星状态、定位状态以及接收机速度等信息。NMEA 0183 实际上已成为所有的 GPS 接收机最通用的数据输出格式，同时它也被用于与 GPS 接收机接口的大多数的软件包">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-05-02T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-05-06T17:13:05.829Z">
+<meta property="article:published_time" content="2021-05-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-05-18T03:04:34.465Z">
 <meta property="article:author" content="DaftPumpkin">
-<meta property="article:tag" content="Python">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Kevin&#39;s Blog" type="application/atom+xml">
@@ -162,102 +162,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-picamera的相关接口" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-GPS+pynmea2" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      picamera的相关接口
+      GPS + pynmea2
     </h1>
   
 
         
-        <a href="/2021/05/03/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
-  	<time datetime="2021-05-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-03</time>
+        <a href="/2021/05/08/GPS+pynmea2/" class="archive-article-date">
+  	<time datetime="2021-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="摄像头的驱动方法"><a href="#摄像头的驱动方法" class="headerlink" title="摄像头的驱动方法"></a>摄像头的驱动方法</h1><h2 id="1-硬件连接："><a href="#1-硬件连接：" class="headerlink" title="1. 硬件连接："></a>1. 硬件连接：</h2><p>把摄像头的排线插入到网口和 HDMI 口之间的排线插槽，银色亮面朝向 HDMI 口。需要先把树莓 派板载的排线插槽的扣子拨开，才能插入排线。排线需要紧密插入排线插槽，同时应注意避免排 线折弯。排线插入之后，需要把插槽的扣子重新扣上。</p>
-<h2 id="2-软件驱动："><a href="#2-软件驱动：" class="headerlink" title="2. 软件驱动："></a>2. 软件驱动：</h2><p>1.进入Raspbian系统终端，更新系统：    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update    </span><br><span class="line">apt-get upgrade</span><br></pre></td></tr></table></figure>
-<p>2.进入摄像头配置选项：   <code> sudo raspi-config</code><br>依次选择：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Interfacing Options --&gt; Camera --&gt; Would you like the camera interface to be enabled? &lt;Yes&gt;</span><br></pre></td></tr></table></figure>
-<p>3.重启系统： <code>sudo reboot</code> 配置完成。</p>
-<p>4.在命令行中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vcgencmd get_camera</span><br><span class="line">supported&#x3D;1 detected&#x3D;1</span><br></pre></td></tr></table></figure>
-<p>说明摄像头连接成功。</p>
+        <p><strong>GPS + pynmea2</strong><br>使用pynmea2解析GPS模块</p>
+<hr>
+<h1 id="GPS"><a href="#GPS" class="headerlink" title="GPS:"></a>GPS:</h1><p>项目中使用到AT1218-BD模块</p>
+<p>NMEA 0183 是一套定义接收机输出的标准协议，有几种不同的格式，每种都是独立的、逗点隔开文本数据。它们包含了可见的卫星、卫星状态、定位状态以及接收机速度等信息。NMEA 0183 实际上已成为所有的 GPS 接收机最通用的数据输出格式，同时它也被用于与 GPS 接收机接口的大多数的软件包里。</p>
+<h1 id="Pynmea2："><a href="#Pynmea2：" class="headerlink" title="Pynmea2："></a>Pynmea2：</h1><p>pynmea2 是一个用来处理 NMEA 0183 协议的第三方模块。</p>
+<p>pynmea2的GitHub页面：<a target="_blank" rel="noopener" href="https://github.com/Knio/pynmea2">https://github.com/Knio/pynmea2</a></p>
 <span id="more"></span>
 
-<h2 id="3-控制台中对摄像头的基本操作"><a href="#3-控制台中对摄像头的基本操作" class="headerlink" title="3. 控制台中对摄像头的基本操作"></a>3. 控制台中对摄像头的基本操作</h2><p>1.拍照：    <code>raspistill -o image.jpg</code><br>此处image.jpg 是照片文件名。</p>
-<p>2.录像：    <code>raspivid -o video.h264 -t 10000</code><br>其中 -t 10000 表示录制 10 秒，用户各根据自己的需要进行调整。#使用Python控制摄像头#</p>
-<h1 id="使用Python控制摄像头（piccamera库）"><a href="#使用Python控制摄像头（piccamera库）" class="headerlink" title="使用Python控制摄像头（piccamera库）"></a>使用Python控制摄像头（piccamera库）</h1><h2 id="快速总览："><a href="#快速总览：" class="headerlink" title="快速总览："></a>快速总览：</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> picamera</span><br><span class="line">camera = picamera.PiCamera()</span><br><span class="line"></span><br><span class="line">camera.saturation = <span class="number">80</span> <span class="comment"># 设置图像视频的饱和度</span></span><br><span class="line">camera.brightness = <span class="number">50</span> <span class="comment"># 设置图像的亮度(50表示白平衡的状态)</span></span><br><span class="line">camera.shutter_speed = <span class="number">6000000</span> <span class="comment"># 相机快门速度  数值越大，曝光时间越长</span></span><br><span class="line">camera.iso = <span class="number">800</span> <span class="comment"># ISO标准实际上就是来自胶片工业的标准称谓，ISO是衡量胶片对光线敏感程度的标准。如50 ISO, 64 ISO, 100 ISO表示在曝光感应速度上要比高数值的来得慢，高数值ISO是指超过200以上的标准，如200 ISO, 400 ISO</span></span><br><span class="line">camera.sharpness = <span class="number">0</span> <span class="comment">#设置图像的锐度值，默认是0，取值范围是-100~100之间</span></span><br><span class="line">camera.framrate = <span class="number">32</span> <span class="comment">#这里可能用的Fraction是一个分数模块来存储分数1/6，保证分数运算的精度(记得调用模块：from fractions import Fraction) </span></span><br><span class="line">camera.hflip = <span class="literal">True</span> <span class="comment"># 是否进行水平翻转 </span></span><br><span class="line">camera.vflip = <span class="literal">False</span> <span class="comment">#是否进行垂直翻转 </span></span><br><span class="line">camera.rotation = <span class="number">0</span> <span class="comment">#是否对图像进行旋转</span></span><br><span class="line">camera.resolution = (<span class="number">280</span>,<span class="number">160</span>) <span class="comment">#设置图像的width和height </span></span><br><span class="line">a_gain = camera.analog_gain <span class="comment">#这个值表示摄像头传感器件到数字装换之前的模拟信号的增益，格式是Fraction的格式 一般似乎也用不上</span></span><br><span class="line">d_gain = camera.digital_gain <span class="comment">#这个值表示摄像头的数字增益大小 一般似乎也用不上</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h2><p><code>sudo pip install pynmea2</code></p>
+<h2 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h2><p>使用<code>parse(data, check = false)</code>函数，解析单条NMEA语句。<br>该函数接收一条包含NMEA 0183的语句，并且返回一个<strong>NMEASentence</strong> 对象。<br>需要注意的是：在解析语句时，开头的’<strong>$</strong>‘是一个可选项，末尾的空格会被忽略。</p>
+<p>如果<code>check = False</code>，parse函数将接受没有校验和的NMEA消息，但是如果存在，它仍然会引发<strong>Pyme2.ChecksumError</strong>。如果缺少校验和，<code>check = True</code>也会引发<strong>checksum</strong>错误。</p>
+<p>实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> pynmea2</span><br><span class="line"></span><br><span class="line">msg = pynmea2.parse(<span class="string">&quot;$GPGGA,184353.07,1929.045,S,02410.506,E,1,04,2.6,100.00,M,-33.9,M,,0000*6D&quot;</span>)</span><br><span class="line"></span><br><span class="line">msg&lt;GGA(timestamp=datetime.time(<span class="number">18</span>, <span class="number">43</span>, <span class="number">53</span>), lat=<span class="string">&#x27;1929.045&#x27;</span>, lat_dir=<span class="string">&#x27;S&#x27;</span>, lon=<span class="string">&#x27;02410.506&#x27;</span>, lon_dir=<span class="string">&#x27;E&#x27;</span>, gps_qual=<span class="string">&#x27;1&#x27;</span>, num_sats=<span class="string">&#x27;04&#x27;</span>, horizontal_dil=<span class="string">&#x27;2.6&#x27;</span>, altitude=<span class="number">100.0</span>, altitude_units=<span class="string">&#x27;M&#x27;</span>, geo_sep=<span class="string">&#x27;-33.9&#x27;</span>, geo_sep_units=<span class="string">&#x27;M&#x27;</span>, age_gps_data=<span class="string">&#x27;&#x27;</span>, ref_station_id=<span class="string">&#x27;0000&#x27;</span>)&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h3 id="ISO感光度的设置技巧"><a href="#ISO感光度的设置技巧" class="headerlink" title="ISO感光度的设置技巧"></a>ISO感光度的设置技巧</h3><p>一般白天光线充足的情况ISO是100到200。<br>在黑暗的条件下（如下雨天），ISO调到300-400，比较暗调到800，灯光非常暗（太阳下山后），调到1000以上，拍夜景（如夜间庆典、演唱会）调到1600以上。<br>ISO调到越高，拍出来的照片噪点就越多，所以ISO不是越高越好，只是在光线不足的情况下使用，并且尽可能调低ISO数值。</p>
-<h3 id="快门速度的设置技巧"><a href="#快门速度的设置技巧" class="headerlink" title="快门速度的设置技巧"></a>快门速度的设置技巧</h3><p>一般情况下，正常快门速度是在60分之一秒到80分之一秒。拍摄行人、阴天或者日落时候的运动对象快门速度1/125秒。<br><strong>拍摄高速运动的物体或画面，快门速度360/1秒~600/1秒。</strong><br>如拍打篮球的画面。拍摄下落的水滴需要1/1000秒。<br>拍绸缎感的流水，或者夜景汽车灯河用慢速快门。拍运动定格用快速快门。<br>室外光线条件好，则快门可以较快，光线暗则要放慢快门速度。快门数一般是没用常用的，你要是想设置为默认快门，那么就是用A档或是自动挡吧！只有这两个档位是默认快门数。像S档和M档都是可以设置快门速度的。</p>
-<h3 id="拍照与实时视频"><a href="#拍照与实时视频" class="headerlink" title="拍照与实时视频"></a>拍照与实时视频</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">camera.capture(<span class="string">&#x27;test.jpg&#x27;</span>, use_video_port = <span class="literal">False</span>) <span class="comment">#拍摄一张图片，图片的名称为test.jpg use_video_port用来指定是通过视频接口来使用还是普通的接口，详解如下</span></span><br><span class="line"></span><br><span class="line">camera.capture_continuous(rawCapture, <span class="built_in">format</span>=<span class="string">&quot;bgr&quot;</span>, use_video_port=<span class="literal">True</span>) <span class="comment">#连续的拍摄一组视频帧，将每一帧都存储在rawCapture这个变量当中，存储的格式是bgr的格式，使用了摄像头的接口</span></span><br></pre></td></tr></table></figure>
+<p>NMEASentence对象有不同的属性，这取决于它的句子类型。GGA消息具有以下属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.timestampdatetime.time(<span class="number">18</span>, <span class="number">43</span>, <span class="number">53</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.lat</span><br><span class="line"><span class="string">&#x27;1929.045&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.lat_dir</span><br><span class="line"><span class="string">&#x27;S&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.lon</span><br><span class="line"><span class="string">&#x27;02410.506&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.lon_dir</span><br><span class="line"><span class="string">&#x27;E&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.gps_qual</span><br><span class="line"><span class="string">&#x27;1&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.num_sats</span><br><span class="line"><span class="string">&#x27;04&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.horizontal_dil</span><br><span class="line"><span class="string">&#x27;2.6&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.altitude100<span class="number">.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.altitude_units</span><br><span class="line"><span class="string">&#x27;M&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.geo_sep</span><br><span class="line"><span class="string">&#x27;-33.9&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.geo_sep_units</span><br><span class="line"><span class="string">&#x27;M&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.age_gps_data</span><br><span class="line"><span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.ref_station_id</span><br><span class="line"><span class="string">&#x27;0000&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">capture(output, <span class="built_in">format</span>=<span class="literal">None</span>, use_video_port=<span class="literal">False</span>, resize=<span class="literal">None</span>, </span><br><span class="line">splitter_port=<span class="number">0</span>, bayer=<span class="literal">False</span>, \*\*options)  <span class="comment">#从摄像头中获得一张图像，将这张图像存储在output当中.</span></span><br><span class="line"></span><br><span class="line">capture_continuous(output, <span class="built_in">format</span>=<span class="literal">None</span>, use_video_port=<span class="literal">False</span>, resize=<span class="literal">None</span>, splitter_port=<span class="number">0</span>, burst=<span class="literal">False</span>, bayer=<span class="literal">False</span>, \*\*options) <span class="comment">#从摄像头上获取连续的视频流，相关的参数和上面的函数相似  </span></span><br></pre></td></tr></table></figure>
+<p>除了在消息数据中显式显示的属性之外，还可能存在其他属性。</p>
+<p>例如，纬度(latitude)和经度(longitude)属性作为辅助对象存在，以python float（DD，“decimal degrees”）而不是NMEA协议中使用的DDDMM.MMMM（“degrees，minutes，seconds”）格式访问地理坐标。还支持<br>latitude_minutes, latitude_seconds, longitude_minutes, 和 longitude_seconds，并允许创建不同格式的位置字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.latitude-<span class="number">19.4840833333</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg.longitude24<span class="number">.1751</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%02d°%07.4f′&#x27;</span> % (msg.latitude, msg.latitude_minutes)</span><br><span class="line"><span class="string">&#x27;-19°29.0450′&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%02d°%02d′%07.4f″&#x27;</span> % (msg.latitude, msg.latitude_minutes, msg.latitude_seconds)</span><br><span class="line"><span class="string">&quot;-19°29′02.7000″&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>参数output是一个用来保存图像数据的区域：<br>output为字符串string的时候，表示将得到的数据写入到文件名是string文件当中output是一个可以写入的对象时，就相当于将图像的数据追加append到对象的后面output也可以是一个具有buffer protocal数据类型的数据(要保证足够大的写入空间来保存图像)<br>参数format是表示文件的类型，主要有下面的文件类型：<br>‘jpeg’ - Write a JPEG file<br>‘png’ - Write a PNG file<br>‘gif’ - Write a GIF file<br>‘bmp’ - Write a Windows bitmap file<br>‘yuv’ - Write the raw image data to a file in YUV420 format<br>‘rgb’ - Write the raw image data to a file in 24-bit RGB format<br>‘bgr’ - Write the raw image data to a file in 24-bit BGR format  </p>
-<p>参数use_video_port用来表示获取图像的端口：<br>True 表示从视频端口获取图像，这个时候为了保证视频的帧速，画质就会降低<br>False 表示从标准的端口获取图像，图像的质量较高，获取的时间较长</p>
-<h3 id="录制视频"><a href="#录制视频" class="headerlink" title="录制视频"></a>录制视频</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camera.start_recording(<span class="string">&#x27;Video.mjpeg&#x27;</span>,<span class="built_in">format</span> = <span class="string">&#x27;mjpeg&#x27;</span>) <span class="comment"># 开始进行录制视频的参数设置，param1是录制视频的文件名  param2是设置录制文件的格式 param3是录制视频的尺寸大小，详细如下解释</span></span><br><span class="line">camera.wait_recording(<span class="number">20</span>) <span class="comment"># 启动开始录制，等待总共录制的时间为20s 主要单位是s秒camera.stop_recording() # 停止视频的录制功能</span></span><br></pre></td></tr></table></figure>
+<h1 id="生成："><a href="#生成：" class="headerlink" title="生成："></a>生成：</h1><p>可以通过使用talker、消息类型和数据字段调用构造函数来创建NMEASentence对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> pynmea2</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>msg = pynmea2.GGA(<span class="string">&#x27;GP&#x27;</span>, <span class="string">&#x27;GGA&#x27;</span>, (<span class="string">&#x27;184353.07&#x27;</span>, <span class="string">&#x27;1929.045&#x27;</span>, <span class="string">&#x27;S&#x27;</span>, <span class="string">&#x27;02410.506&#x27;</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;04&#x27;</span>, <span class="string">&#x27;2.6&#x27;</span>, <span class="string">&#x27;100.00&#x27;</span>, <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;-33.9&#x27;</span>, <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;0000&#x27;</span>))</span><br></pre></td></tr></table></figure>
 
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> picamera <span class="keyword">import</span> PiCamera</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line">camera = PiCamera()</span><br><span class="line">camera.start_preview()</span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-
-<p>进入终端，执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 Desktop&#x2F;camera.py</span><br></pre></td></tr></table></figure>
-<p>桌面将弹出预览框，实时取景并预览</p>
-<p><u>需要注意的是，预览框仅在直接连接屏幕时有效，而是使用VNC等软件远程连接树莓派桌面，则不会弹出该预览框</u></p>
-<p>如果预览画面是上下颠倒的，则可以通过以下代码旋转180度：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camera = PiCamera()</span><br><span class="line">camera.rotation = <span class="number">180</span></span><br></pre></td></tr></table></figure>
-<p>预览画面可旋转90度、180度、270度<br>如果要重置画面，可将画面旋转0度</p>
-<p>设置预览框的透明度：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview(alpha=<span class="number">100</span>)         <span class="comment">#alpha的值范围是0-255</span></span><br></pre></td></tr></table></figure>
-<h2 id="1-拍照"><a href="#1-拍照" class="headerlink" title="1.拍照"></a>1.拍照</h2><p>在预览代码的中间插入camera.capture()命令</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/image.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-<p><u>请注意：必须要执行代码sleep(5)，以便给摄像头的传感器留下一定时间调整亮度和白平衡</u></p>
-<h2 id="2-录像"><a href="#2-录像" class="headerlink" title="2.录像"></a>2.录像</h2><p>移除 camera.captue()，并加入camera.start_recording()和camera.stop_recording()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.start_recording(<span class="string">&#x27;/home/pi/Desktop/video.mp4&#x27;</span>)</span><br><span class="line">sleep(<span class="number">5</span>)||camera.wait_recording(<span class="number">5</span>)</span><br><span class="line">camera.stop_recording()</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-<p>以上代码执行后，将在桌面生成video.mp4的视频，长度为5秒</p>
-<h2 id="3-更多参数设置"><a href="#3-更多参数设置" class="headerlink" title="3.更多参数设置"></a>3.更多参数设置</h2><p>picamera可以给图片添加很多参数</p>
-<h3 id="设置分辨率"><a href="#设置分辨率" class="headerlink" title="设置分辨率"></a>设置分辨率</h3><p>默认情况下，图片的分辨率等于显示器的分辨率，但最大的图像尺寸不超过2592*1944 像素，视屏尺寸不超过1920*1080像素；图像和视屏的最小尺寸则为64*64像素。</p>
-<p>可使用如下代码设置图像的分辨率：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">camera.resolution = (<span class="number">2592</span>, <span class="number">1944</span>)</span><br><span class="line">camera.framerate = <span class="number">15</span></span><br><span class="line">camera.start_preview()</span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/max.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-<p><u>注意：相机的帧数需要设置为≤15帧，以支持最大分辨率。</u></p>
-<h3 id="给图片添加文字"><a href="#给图片添加文字" class="headerlink" title="给图片添加文字"></a>给图片添加文字</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.annotate_text = <span class="string">&quot;Hello world!&quot;</span></span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/text.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="1-文字大小可以自定义"><a href="#1-文字大小可以自定义" class="headerlink" title="1.文字大小可以自定义"></a>1.文字大小可以自定义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camera.annotate_text_size = <span class="number">50</span>          <span class="comment">#annotate_text_size的取值范围为6-160，默认值32</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-文字颜色自定义"><a href="#2-文字颜色自定义" class="headerlink" title="2.文字颜色自定义"></a>2.文字颜色自定义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.annotate_background = Color(<span class="string">&#x27;blue&#x27;</span>)</span><br><span class="line">camera.annotate_foreground = Color(<span class="string">&#x27;yellow&#x27;</span>)</span><br><span class="line">camera.annotate_text = <span class="string">&quot; Hello world &quot;</span></span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改图片的参数"><a href="#修改图片的参数" class="headerlink" title="修改图片的参数"></a>修改图片的参数</h3><h4 id="1-亮度"><a href="#1-亮度" class="headerlink" title="1.亮度"></a>1.亮度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.brightness = <span class="number">70</span></span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/bright.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-<p>brightness的取值范围为0-100，默认值50</p>
-<h4 id="2-对比度"><a href="#2-对比度" class="headerlink" title="2.对比度"></a>2.对比度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> camera.contrast = <span class="number">50</span>           <span class="comment">#contrast的取值范围为0-100，默认值50</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h4 id="3-风格"><a href="#3-风格" class="headerlink" title="3.风格"></a>3.风格</h4><p>可通过camera.image_effect，给图片添加特效：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">有效值：</span><br><span class="line"></span><br><span class="line">none(默认)</span><br><span class="line">negative</span><br><span class="line">solarize</span><br><span class="line">sketch</span><br><span class="line">denoise</span><br><span class="line">emboss</span><br><span class="line">oilpaint</span><br><span class="line">hatch</span><br><span class="line">gpen</span><br><span class="line">pastel</span><br><span class="line">watercolor</span><br><span class="line">film</span><br><span class="line">blur</span><br><span class="line">saturation</span><br><span class="line">colorswap</span><br><span class="line">washedout</span><br><span class="line">posterise</span><br><span class="line">colorpoint</span><br><span class="line">colorbalance</span><br><span class="line">cartoon</span><br><span class="line">deinterlace1</span><br><span class="line">deinterlace2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.image_effect = <span class="string">&#x27;colorswap&#x27;</span></span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/colorswap.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-模式"><a href="#4-模式" class="headerlink" title="4.模式"></a>4.模式</h4><p>可使用camera.exposure_mode，设置拍照模式（如夜晚、运动、雪地等模式）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">有效值：</span><br><span class="line"></span><br><span class="line">off</span><br><span class="line">auto(默认)</span><br><span class="line">night</span><br><span class="line">nightpreview</span><br><span class="line">backlight</span><br><span class="line">spotlight</span><br><span class="line">sports</span><br><span class="line">snow</span><br><span class="line">beach</span><br><span class="line">verylong</span><br><span class="line">fixedfps</span><br><span class="line">antishake</span><br><span class="line">fireworks</span><br></pre></td></tr></table></figure>
-
-<p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.exposure_mode = <span class="string">&#x27;beach&#x27;</span></span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/beach.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-<h4 id="5-白平衡"><a href="#5-白平衡" class="headerlink" title="5.白平衡"></a>5.白平衡</h4><p>可使用camera.awb_mode设置白平衡</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">有效值：</span><br><span class="line"></span><br><span class="line">off</span><br><span class="line">auto(默认)</span><br><span class="line">sunlight</span><br><span class="line">cloudy</span><br><span class="line">shade</span><br><span class="line">tungsten</span><br><span class="line">fluorescent</span><br><span class="line">incandescent</span><br><span class="line">flash</span><br><span class="line">horizon</span><br></pre></td></tr></table></figure>
-
-<p>例如设置白平衡为“白天”</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">camera.start_preview()</span><br><span class="line">camera.awb_mode = <span class="string">&#x27;sunlight&#x27;</span></span><br><span class="line">sleep(<span class="number">5</span>)</span><br><span class="line">camera.capture(<span class="string">&#x27;/home/pi/Desktop/sunlight.jpg&#x27;</span>)</span><br><span class="line">camera.stop_preview()</span><br></pre></td></tr></table></figure>
-
-
-
+<p>并从NMEASentence对象生成一个NMEA字符串：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">str</span>(msg)</span><br><span class="line"><span class="string">&#x27;$GPGGA,184353.07,1929.045,S,02410.506,E,1,04,2.6,100.00,M,-33.9,M,,0000*6D&#x27;</span></span><br></pre></td></tr></table></figure>
       
 
       
@@ -270,7 +220,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
         		</li>
       		
 		</ul>
@@ -326,7 +276,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://daftpumpkin.github.io/2021/05/03/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://daftpumpkin.github.io/2021/05/08/GPS+pynmea2/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -340,18 +290,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/05/04/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          C++学习笔记
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/05/02/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">树莓派配置</div>
+    <a href="/2021/05/08/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux学习笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -370,6 +311,19 @@
             </div>
         </div>
         
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GPS"><span class="toc-number">1.</span> <span class="toc-text">GPS:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pynmea2%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">Pynmea2：</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">安装：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%EF%BC%9A"><span class="toc-number">2.2.</span> <span class="toc-text">解析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">生成：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
         
     </div>
 </aside>
