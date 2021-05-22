@@ -162,6 +162,107 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-QT中的多线程处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/05/21/QT%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86/">Qt中的多线程处理</a>
+    </h1>
+  
+
+        
+        <a href="/2021/05/21/QT%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Qt中的多线程处理，涉及到信号与槽的用法</strong></p>
+<hr>
+<p>这里举一个实例，使用python的多线程库：<br><code>threading</code><br>解决阻塞的问题：</p>
+<p>（这是一段发送HTTP请求的部分代码，这就是一种常见的阻塞操作，因为网络原因需要等待服务器响应）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">sendRequest</span>(<span class="params">self</span>):</span></span><br><span class="line">        method = self.ui.boxMethod.currentText()</span><br><span class="line">        url    = self.ui.editUrl.text()</span><br><span class="line">        payload = self.ui.editBody.toPlainText()</span><br><span class="line">        <span class="comment"># 获取消息头</span></span><br><span class="line">        headers = &#123;&#125;</span><br><span class="line">        <span class="comment"># 此处省略一些对消息头的处理</span></span><br><span class="line">        req = requests.Request(method,</span><br><span class="line">                               url,</span><br><span class="line">                               headers=headers,</span><br><span class="line">                               data=payload</span><br><span class="line">                               )</span><br><span class="line">        prepared = req.prepare()</span><br><span class="line">        self.pretty_print_request(prepared)</span><br><span class="line">        s = requests.Session()</span><br><span class="line">        <span class="comment"># 创建新的线程去执行发送方法，</span></span><br><span class="line">        <span class="comment"># 服务器慢，只会在新线程中阻塞</span></span><br><span class="line">        <span class="comment"># 不影响主线程</span></span><br><span class="line">        thread = Thread(target = self.threadSend,</span><br><span class="line">                        args= (s, prepared)</span><br><span class="line">                        )</span><br><span class="line">        thread.start()</span><br><span class="line">    <span class="comment"># 新线程入口函数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threadSend</span>(<span class="params">self,s,prepared</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = s.send(prepared)</span><br><span class="line">            self.pretty_print_response(r)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            self.ui.outputWindow.append(</span><br><span class="line">                traceback.format_exc())</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>这样，通过创建新的线程去执行发送方法，服务器响应再慢，也只会在新线程中阻塞。<br>主线程启动新线程后，就继续执行后面的代码，返回继续运行Qt的事件循环处理 ，可以响应用户的操作，就不会僵死了。</p>
+<p>在QT的主进程中，如果存在一些阻塞性操作，例如：网络请求，读写大文件，sleep等。那么QT界面在阻塞进程的过程是无法进行渲染的，例如想要利用textBrowser更新文本信息，即使在阻塞的for循环中有<code>textBrowser.append()</code>的语句，也会在阻塞操作完成后，才会在界面上显示出来。</p>
+<p>如果我们想通过子线程发出QT控件的信号来更新界面。只是简单的使用python的线程处理，可以进行如下操作：</p>
+<p><strong>把更新界面的操作，直接放到新的一个线程中去执行</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threadSend</span>(<span class="params">self,s,prepared</span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            r = s.send(prepared)</span><br><span class="line">            <span class="comment"># 在新线程中输出内容到界面</span></span><br><span class="line">            self.pretty_print_response(r)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="comment"># 在新线程中输出内容到界面</span></span><br><span class="line">            self.ui.outputWindow.append(</span><br><span class="line">                traceback.format_exc())</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>但是：</strong></p>
+<p>Qt建议，<strong>只在主线程中操作界面</strong> 。在另外一个线程直接操作界面，可能会导致意想不到的问题，比如：<br>输出显示不全，甚至程序崩溃。</p>
+<p>但是，我们确实经常需要在子线程中更新界面。</p>
+<p>想要达到这个目的，可以使用<strong>信号</strong>：</p>
+<p>具体流程如下：</p>
+<ul>
+<li>自定义一个Qt 的 QObject类（只有QObject类才能发出信号），里面封装一些自定义的 Signal信号。</li>
+<li>定义主线程执行的函数处理Signal信号（通过connect方法）</li>
+<li>在新线程需要操作界面的时候，就通过自定义对象 发出 信号<br>通过该信号对象的 emit方法发出信号， emit方法的参数 传递必要的数据。参数类型 遵循 定义Signal时，指定的类型。</li>
+<li>主线程信号处理函数，被触发执行，获取Signal里面的参数，执行必要的更新界面操作</li>
+</ul>
+<p>怎么封装自定义的 Signal信号？<br>参考下面的示例代码。一种信号定义为该类的<strong>一个静态属性</strong>，值为Signal 实例对象即可。可以定义<strong>多个</strong>Signal静态属性，对应这种类型的对象可以发出的 多种 信号。</p>
+<p>注意：Signal实例对象的初始化参数指定的类型，就是 发出信号对象时，传递的参数数据类型。因为Qt底层是C++开发的，必须指定类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> PySide2.QtWidgets <span class="keyword">import</span> QApplication, QTextBrowser</span><br><span class="line"><span class="keyword">from</span> PySide2.QtUiTools <span class="keyword">import</span> QUiLoader</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line"><span class="keyword">from</span> PySide2.QtCore <span class="keyword">import</span> Signal,QObject</span><br><span class="line"><span class="comment"># 自定义信号源对象类型，一定要继承自 QObject</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySignals</span>(<span class="params">QObject</span>):</span></span><br><span class="line">    <span class="comment"># 定义一种信号，两个参数 类型分别是： QTextBrowser 和 字符串</span></span><br><span class="line">    <span class="comment"># 调用 emit方法 发信号时，传入参数 必须是这里指定的 参数类型</span></span><br><span class="line">    text_print = Signal(QTextBrowser,<span class="built_in">str</span>)</span><br><span class="line">    <span class="comment"># 还可以定义其他种类的信号</span></span><br><span class="line">    update_table = Signal(<span class="built_in">str</span>)</span><br><span class="line"><span class="comment"># 实例化</span></span><br><span class="line">global_ms = MySignals()    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stats</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.ui = QUiLoader().load(<span class="string">&#x27;main.ui&#x27;</span>)</span><br><span class="line">        <span class="comment"># 自定义信号的处理函数</span></span><br><span class="line">        global_ms.text_print.connect(self.printToGui)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printToGui</span>(<span class="params">self,fb,text</span>):</span></span><br><span class="line">        fb.append(<span class="built_in">str</span>(text))</span><br><span class="line">        fb.ensureCursorVisible()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">task1</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">threadFunc</span>():</span></span><br><span class="line">            <span class="comment"># 通过Signal 的 emit 触发执行 主线程里面的处理函数</span></span><br><span class="line">            <span class="comment"># emit参数和定义Signal的数量、类型必须一致</span></span><br><span class="line">            global_ms.text_print.emit(self.ui.infoBox1, <span class="string">&#x27;输出内容&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        thread = Thread(target = threadFunc )</span><br><span class="line">        thread.start()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">task2</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">threadFunc</span>():</span></span><br><span class="line">            global_ms.text_print.emit(self.ui.infoBox2, <span class="string">&#x27;输出内容&#x27;</span>)</span><br><span class="line">        thread = Thread(target=threadFunc)</span><br><span class="line">        thread.start()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Qt</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-GPS+pynmea2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -836,103 +937,10 @@
 
 
   
-    <article id="post-在树莓派上安装Pyside2和QT相关软件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/20/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85Pyside2%E5%92%8CQT%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/">在树莓派上安装Pyside2和QT相关软件</a>
-    </h1>
-  
-
-        
-        <a href="/2021/04/20/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85Pyside2%E5%92%8CQT%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2021-04-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>记录一下在树莓派上安装Pyside2和QT相关软件的过程中遇到的相关问题与解决方法</strong></p>
-<hr>
-<p>不同于在windows安装pyside2那么简单，只需要一行：</p>
-<p><code>pip install pyside2</code></p>
-<p>在树莓派上安装这个库相当的麻烦，使用上面的命令直接安装会报错，提示没有相应的版本，需要使用apt工具手动安装相关的包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pyside2.qt3dcore python3-pyside2.qt3dinput python3-pyside2.qt3dlogic python3-pyside2.qt3drender python3-pyside2.qtcharts python3-pyside2.qtconcurrent python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qthelp python3-pyside2.qtlocation python3-pyside2.qtmultimedia python3-pyside2.qtmultimediawidgets python3-pyside2.qtnetwork python3-pyside2.qtopengl python3-pyside2.qtpositioning python3-pyside2.qtprintsupport python3-pyside2.qtqml python3-pyside2.qtquick python3-pyside2.qtquickwidgets python3-pyside2.qtscript python3-pyside2.qtscripttools python3-pyside2.qtsensors python3-pyside2.qtsql python3-pyside2.qtsvg python3-pyside2.qttest python3-pyside2.qttexttospeech python3-pyside2.qtuitools python3-pyside2.qtwebchannel python3-pyside2.qtwebsockets python3-pyside2.qtwidgets python3-pyside2.qtx11extras python3-pyside2.qtxml python3-pyside2.qtxmlpatterns python3-pyside2uic</span><br></pre></td></tr></table></figure>
-
-<p>但是以上的包并没有完整覆盖到Windows平台下的pyside2的全部内容。</p>
-<ul>
-<li>在Windows下pip安装pyside2会自带QT Designer工具</li>
-<li>缺少常用的：QTwebEnginWidgets控件和相关的依赖</li>
-</ul>
-<p><strong>要解决以上两个问题：</strong></p>
-<p>1.使用如下命令安装QT Designer相关工具：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt5-default </span><br><span class="line">sudo apt-get install qtcreator</span><br></pre></td></tr></table></figure>
-
-<p>2.安装QTwebEngineWidgets：</p>
-<p>尝试使用apt工具安装，安装成功，但是仍然无法调用，估计原因为缺少相关依赖，于是前往Debian官方软件包库查询：<br><a target="_blank" rel="noopener" href="https://packages.debian.org/search?keywords=buster">Debian Packages</a></p>
-<p>搜索关键词：QtWebEngineWidgets</p>
-<p>进入pyside2-python3的包页面：<br><a target="_blank" rel="noopener" href="https://packages.debian.org/buster/python3-pyside2.qtwebenginewidgets">python3-pyside2.qtwebenginewidgets</a></p>
-<p>可以在页面中看到这个包的相关依赖，依次安装即可。</p>
-<p><strong>注意</strong>：</p>
-<ul>
-<li>树莓派的官方系统是armhf，不要选错版本了</li>
-<li>遇到无法下载的问题，选择CN源，并使用wget工具下载，wget下载的目录就是终端运行所在的目录</li>
-<li>使用<code>sudo dpkg -i packagename.deb</code>安装下载好的包</li>
-<li>要按照包依赖的关系安装，否则会出现依赖错误，如果在安装某个包时遇到依赖错误，可以使用：<br><code>sudo apt-get -f install</code><br>自动安装相关依赖</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -1032,6 +1040,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Qt</a>
               </li>
              
               <li class="article-tag-list-item">

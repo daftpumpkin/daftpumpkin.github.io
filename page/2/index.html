@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://daftpumpkin.github.io">
-  <title>Archives | Kevin&#39;s Blog</title>
+  <title>Kevin&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="个人博客，欢迎光临">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kevin&#39;s Blog">
-<meta property="og:url" content="https://daftpumpkin.github.io/archives/index.html">
+<meta property="og:url" content="https://daftpumpkin.github.io/page/2/index.html">
 <meta property="og:site_name" content="Kevin&#39;s Blog">
 <meta property="og:description" content="个人博客，欢迎光临">
 <meta property="og:locale" content="zh_CN">
@@ -162,395 +162,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-在树莓派上安装Pyside2和QT相关软件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/20/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85Pyside2%E5%92%8CQT%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/">在树莓派上安装Pyside2和QT相关软件</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/20/%E5%9C%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E4%B8%8A%E5%AE%89%E8%A3%85Pyside2%E5%92%8CQT%E7%9B%B8%E5%85%B3%E8%BD%AF%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2021-04-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
+</a>
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>记录一下在树莓派上安装Pyside2和QT相关软件的过程中遇到的相关问题与解决方法</strong></p>
+<hr>
+<p>不同于在windows安装pyside2那么简单，只需要一行：</p>
+<p><code>pip install pyside2</code></p>
+<p>在树莓派上安装这个库相当的麻烦，使用上面的命令直接安装会报错，提示没有相应的版本，需要使用apt工具手动安装相关的包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-pyside2.qt3dcore python3-pyside2.qt3dinput python3-pyside2.qt3dlogic python3-pyside2.qt3drender python3-pyside2.qtcharts python3-pyside2.qtconcurrent python3-pyside2.qtcore python3-pyside2.qtgui python3-pyside2.qthelp python3-pyside2.qtlocation python3-pyside2.qtmultimedia python3-pyside2.qtmultimediawidgets python3-pyside2.qtnetwork python3-pyside2.qtopengl python3-pyside2.qtpositioning python3-pyside2.qtprintsupport python3-pyside2.qtqml python3-pyside2.qtquick python3-pyside2.qtquickwidgets python3-pyside2.qtscript python3-pyside2.qtscripttools python3-pyside2.qtsensors python3-pyside2.qtsql python3-pyside2.qtsvg python3-pyside2.qttest python3-pyside2.qttexttospeech python3-pyside2.qtuitools python3-pyside2.qtwebchannel python3-pyside2.qtwebsockets python3-pyside2.qtwidgets python3-pyside2.qtx11extras python3-pyside2.qtxml python3-pyside2.qtxmlpatterns python3-pyside2uic</span><br></pre></td></tr></table></figure>
+
+<p>但是以上的包并没有完整覆盖到Windows平台下的pyside2的全部内容。</p>
+<ul>
+<li>在Windows下pip安装pyside2会自带QT Designer工具</li>
+<li>缺少常用的：QTwebEnginWidgets控件和相关的依赖</li>
+</ul>
+<p><strong>要解决以上两个问题：</strong></p>
+<p>1.使用如下命令安装QT Designer相关工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt5-default </span><br><span class="line">sudo apt-get install qtcreator</span><br></pre></td></tr></table></figure>
+
+<p>2.安装QTwebEngineWidgets：</p>
+<p>尝试使用apt工具安装，安装成功，但是仍然无法调用，估计原因为缺少相关依赖，于是前往Debian官方软件包库查询：<br><a target="_blank" rel="noopener" href="https://packages.debian.org/search?keywords=buster">Debian Packages</a></p>
+<p>搜索关键词：QtWebEngineWidgets</p>
+<p>进入pyside2-python3的包页面：<br><a target="_blank" rel="noopener" href="https://packages.debian.org/buster/python3-pyside2.qtwebenginewidgets">python3-pyside2.qtwebenginewidgets</a></p>
+<p>可以在页面中看到这个包的相关依赖，依次安装即可。</p>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>树莓派的官方系统是armhf，不要选错版本了</li>
+<li>遇到无法下载的问题，选择CN源，并使用wget工具下载，wget下载的目录就是终端运行所在的目录</li>
+<li>使用<code>sudo dpkg -i packagename.deb</code>安装下载好的包</li>
+<li>要按照包依赖的关系安装，否则会出现依赖错误，如果在安装某个包时遇到依赖错误，可以使用：<br><code>sudo apt-get -f install</code><br>自动安装相关依赖</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/21/QT%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/21/QT%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%84%E7%90%86/">Qt中的多线程处理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Qt</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/08/GPS+pynmea2/" class="archive-article-date">
-  	<time datetime="2021-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-08</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/08/GPS+pynmea2/">GPS + pynmea2</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/08/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-05-07T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/08/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">linux学习笔记</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/05/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/" class="archive-article-date">
-  	<time datetime="2021-05-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/05/ARM%E4%BD%93%E7%B3%BB%E4%B8%8E%E6%A1%86%E6%9E%B6/">梳理ARM体系与框架</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/04/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  	<time datetime="2021-05-03T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/04/C-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">C++学习笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/03/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
-  	<time datetime="2021-05-02T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/03/picamera%E7%9A%84%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/">picamera的相关接口</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/02/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-05-01T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/02/%E6%A0%91%E8%8E%93%E6%B4%BE%E9%85%8D%E7%BD%AE/">树莓派配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/01/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/" class="archive-article-date">
-  	<time datetime="2021-04-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/01/%E5%9C%A8Android%E4%B8%8A%E8%BF%90%E8%A1%8CVScode/">在Android上运行VScode</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">折腾记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/05/01/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/" class="archive-article-date">
-  	<time datetime="2021-04-30T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/05/01/%E8%AE%A1%E7%BD%91%E5%A4%8D%E4%B9%A0/">计网复习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/04/30/%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2021-04-29T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/30/%E4%BD%BF%E7%94%A8Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">使用Hexo搭建个人博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">折腾记录</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
-  
-
-    
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
   
 
@@ -577,9 +288,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
